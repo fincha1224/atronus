@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="apple-touch-icon" href="favicon.svg"/>
+<meta name="theme-color" content="#050A18"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <meta name="description" content="Atronus Technologies — Enterprise AI. Compliance Built In. OmniBotX · Risk Intelligence Engine · OmniServe Texas."/>
 <title>Atronus Technologies — Enterprise AI. Compliance Built In.</title>
@@ -27,7 +30,7 @@ body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;
 /* NAV */
 nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(5,10,24,0.94);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:68px;}
 .nav-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
-.logo-mark svg{width:38px;height:38px;}
+.logo-mark svg{width:42px;height:42px;}
 .logo-word{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--teal);}
 .nav-links{display:flex;align-items:center;gap:0.25rem;}
 .nav-item{position:relative;}
@@ -293,51 +296,34 @@ footer{background:var(--navy2);border-top:0.5px solid var(--border2);padding:4re
   <a class="nav-logo" href="#" style="gap:0.5rem;align-items:center;">
     <span class="logo-word" style="line-height:1;">ATRONUS</span>
     <div class="logo-mark" style="display:flex;align-items:center;">
-      <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+      <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
         <defs>
-          <!-- Gold-to-teal gradient for the Playfair A letter -->
-          <linearGradient id="aFontGrad" x1="21" y1="10" x2="21" y2="34" gradientUnits="userSpaceOnUse">
-            <stop offset="0%" stop-color="#FFD166"/>
-            <stop offset="45%" stop-color="#F0B429"/>
-            <stop offset="100%" stop-color="#00D4E8"/>
-          </linearGradient>
+          <style>@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&amp;display=swap');</style>
         </defs>
-
-        <!-- Outer hexagon frame — thicker strokes -->
-        <path d="M21 2.5 L37 11.5 L37 29.5 L21 38.5 L5 29.5 L5 11.5 Z"
-              stroke="#00D4E8" stroke-width="1.8" fill="rgba(0,212,232,0.06)"/>
-
-        <!-- Inner hex ring — depth -->
-        <path d="M21 8 L32 14 L32 28 L21 34 L10 28 L10 14 Z"
-              stroke="rgba(0,212,232,0.15)" stroke-width="0.6" fill="none"/>
-
-        <!-- Right vertical side — emphasized, thicker -->
-        <line x1="37" y1="11.5" x2="37" y2="29.5"
-              stroke="#00D4E8" stroke-width="3" stroke-linecap="round"/>
-
-        <!-- Playfair Display "A" — elegant serif, gold-to-teal gradient -->
-        <!-- font-size 24, baseline y=34 → apex of A at approx y=13 -->
-        <text x="21" y="34"
-              font-family="Playfair Display, Georgia, serif"
-              font-size="24" font-weight="700"
-              fill="url(#aFontGrad)"
+        <!-- r=24 outermost -->
+        <path d="M32 12 L52.8 24 L52.8 48 L32 60 L11.2 48 L11.2 24 Z"
+              fill="none" stroke="#00D4E8" stroke-width="0.8" opacity="0.22"/>
+        <!-- r=18 -->
+        <path d="M32 18 L47.6 27 L47.6 45 L32 54 L16.4 45 L16.4 27 Z"
+              fill="none" stroke="#00D4E8" stroke-width="1" opacity="0.38"/>
+        <!-- r=12 -->
+        <path d="M32 24 L42.4 30 L42.4 42 L32 48 L21.6 42 L21.6 30 Z"
+              fill="none" stroke="#F0B429" stroke-width="1.1" opacity="0.55"/>
+        <!-- r=7 innermost -->
+        <path d="M32 29 L38.1 32.5 L38.1 39.5 L32 43 L25.9 39.5 L25.9 32.5 Z"
+              fill="rgba(0,212,232,0.06)" stroke="#F0B429" stroke-width="1.4" opacity="0.85"/>
+        <!-- Playfair Display A — teal, regular weight -->
+        <text x="32" y="41"
+              font-family="'Playfair Display',Georgia,serif"
+              font-size="16" font-weight="400"
+              fill="#00D4E8"
               text-anchor="middle"
-              dominant-baseline="auto">A</text>
-
-        <!-- Gold knowledge circle — sits precisely at apex of the A -->
-        <!-- cy=13 aligns with cap-height of Playfair A at size 24 -->
-        <circle cx="21" cy="13" r="4.5" fill="#F0B429"/>
-        <circle cx="21" cy="13" r="2.8" fill="#050A18"/>
-        <circle cx="21" cy="13" r="1.2" fill="#F0B429"/>
-
-        <!-- Right vertex accents — gold top, teal bottom -->
-        <circle cx="37" cy="11.5" r="2" fill="#F0B429" opacity="0.7"/>
-        <circle cx="37" cy="29.5" r="2" fill="#00D4E8" opacity="0.7"/>
-
-        <!-- Left vertices — subtle -->
-        <circle cx="5" cy="11.5" r="1.2" fill="#00D4E8" opacity="0.25"/>
-        <circle cx="5" cy="29.5" r="1.2" fill="#00D4E8" opacity="0.25"/>
-        <circle cx="21" cy="38.5" r="1.2" fill="#00D4E8" opacity="0.25"/>
+              opacity="0.95">A</text>
+        <!-- Gold knowledge circle — enlarged, top vertex outermost hex -->
+        <circle cx="32" cy="12" r="13" fill="none" stroke="#F0B429" stroke-width="0.5" opacity="0.18"/>
+        <circle cx="32" cy="12" r="10" fill="#F0B429"/>
+        <circle cx="32" cy="12" r="6" fill="#050A18"/>
+        <circle cx="32" cy="12" r="2.4" fill="#F0B429"/>
       </svg>
     </div>
   </a>

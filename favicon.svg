@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" fill="none">
+  <rect width="64" height="64" rx="13" fill="#050A18"/>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&amp;display=swap');
+  </style>
+  <!-- Nested hexagons — center (32,36) -->
+  <!-- r=24: outermost -->
+  <path d="M32 12 L52.8 24 L52.8 48 L32 60 L11.2 48 L11.2 24 Z"
+        fill="none" stroke="#00D4E8" stroke-width="0.8" opacity="0.22"/>
+  <!-- r=18 -->
+  <path d="M32 18 L47.6 27 L47.6 45 L32 54 L16.4 45 L16.4 27 Z"
+        fill="none" stroke="#00D4E8" stroke-width="1" opacity="0.38"/>
+  <!-- r=12 -->
+  <path d="M32 24 L42.4 30 L42.4 42 L32 48 L21.6 42 L21.6 30 Z"
+        fill="none" stroke="#F0B429" stroke-width="1.1" opacity="0.55"/>
+  <!-- r=7 innermost — A sits inside this -->
+  <path d="M32 29 L38.1 32.5 L38.1 39.5 L32 43 L25.9 39.5 L25.9 32.5 Z"
+        fill="rgba(0,212,232,0.06)" stroke="#F0B429" stroke-width="1.4" opacity="0.85"/>
+  <!-- Playfair Display A — teal, regular weight -->
+  <text x="32" y="41"
+        font-family="'Playfair Display',Georgia,serif"
+        font-size="16" font-weight="400"
+        fill="#00D4E8"
+        text-anchor="middle"
+        opacity="0.95">A</text>
+  <!-- Gold knowledge circle — top vertex of outermost hex (32,12) -->
+  <!-- Enlarged per request -->
+  <circle cx="32" cy="12" r="13" fill="none" stroke="#F0B429" stroke-width="0.5" opacity="0.18"/>
+  <circle cx="32" cy="12" r="10" fill="#F0B429"/>
+  <circle cx="32" cy="12" r="6" fill="#050A18"/>
+  <circle cx="32" cy="12" r="2.4" fill="#F0B429"/>
+</svg>

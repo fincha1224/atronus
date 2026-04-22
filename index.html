@@ -257,6 +257,37 @@ footer{background:var(--navy2);border-top:0.5px solid var(--border2);padding:4re
 /* MODALS */
 .modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(5,10,24,0.96);display:none;align-items:center;justify-content:center;padding:2rem;}
 .modal-overlay.show{display:flex;}
+.form-modal{background:linear-gradient(160deg,#0D1526,#050A18);border:0.5px solid rgba(0,212,232,0.18);border-radius:20px;width:100%;max-width:500px;padding:2.25rem;animation:form-in .22s ease both;box-shadow:0 30px 80px rgba(0,0,0,0.6);position:relative;max-height:90vh;overflow-y:auto;}
+.form-modal::-webkit-scrollbar{width:3px;}
+.form-modal::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
+@keyframes form-in{from{opacity:0;transform:translateY(12px) scale(0.97)}to{opacity:1;transform:none}}
+.fm-close{position:absolute;top:1.25rem;right:1.25rem;background:rgba(255,255,255,0.06);border:none;color:var(--gray);width:32px;height:32px;border-radius:50%;cursor:pointer;font-size:1rem;display:flex;align-items:center;justify-content:center;transition:all 0.2s;}
+.fm-close:hover{background:rgba(255,255,255,0.12);color:var(--white);}
+.fm-eyebrow{font-size:0.65rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.12em;text-transform:uppercase;margin-bottom:0.5rem;}
+.fm-title{font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:700;margin-bottom:0.3rem;}
+.fm-sub{font-size:0.8rem;color:var(--gray);margin-bottom:1.75rem;line-height:1.6;}
+.fm-row{display:grid;grid-template-columns:1fr 1fr;gap:0.875rem;}
+.fm-field{margin-bottom:0.875rem;}
+.fm-label{display:block;font-size:0.68rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;color:var(--teal);margin-bottom:0.35rem;opacity:0.85;}
+.fm-input{width:100%;padding:0.72rem 1rem;background:rgba(255,255,255,0.04);border:0.5px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--white);font-size:0.85rem;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s;-webkit-appearance:none;}
+.fm-input:focus{border-color:rgba(0,212,232,0.5);background:rgba(0,212,232,0.04);}
+.fm-input::placeholder{color:rgba(138,155,181,0.45);}
+select.fm-input{cursor:pointer;}
+select.fm-input option{background:#0D1526;color:#fff;}
+textarea.fm-input{resize:vertical;min-height:88px;line-height:1.65;}
+.fm-err{display:none;color:#f87171;font-size:0.73rem;font-family:'JetBrains Mono',monospace;margin-bottom:0.75rem;padding:0.5rem 0.75rem;background:rgba(248,113,113,0.08);border-radius:6px;border-left:2px solid #f87171;}
+.fm-actions{display:flex;gap:0.75rem;margin-top:0.25rem;}
+.fm-btn-primary{flex:1;padding:0.9rem 1.5rem;background:var(--gold);border:none;border-radius:8px;color:var(--navy);font-weight:700;font-size:0.88rem;cursor:pointer;font-family:'DM Sans',sans-serif;letter-spacing:0.03em;transition:all 0.2s;}
+.fm-btn-primary:hover{background:var(--gold-light);transform:translateY(-1px);}
+.fm-btn-primary:disabled{opacity:0.55;cursor:not-allowed;transform:none;}
+.fm-btn-secondary{padding:0.9rem 1.25rem;background:transparent;border:0.5px solid rgba(255,255,255,0.1);border-radius:8px;color:var(--gray);font-size:0.85rem;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all 0.2s;}
+.fm-btn-secondary:hover{border-color:rgba(255,255,255,0.2);color:var(--white);}
+.fm-success{display:none;text-align:center;padding:1.5rem 0.5rem;}
+.fm-success-icon{font-size:3rem;margin-bottom:1rem;}
+.fm-success h3{font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:0.5rem;}
+.fm-success p{font-size:0.85rem;color:var(--gray2);line-height:1.75;}
+.fm-success .highlight{color:var(--teal);}
+.fm-divider{height:0.5px;background:rgba(255,255,255,0.06);margin:1.25rem 0;}
 .modal-box{background:var(--navy2);border:0.5px solid var(--border);border-radius:12px;max-width:780px;width:100%;max-height:82vh;overflow-y:auto;padding:2.5rem;}
 .modal-box h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:0.4rem;}
 .modal-meta{font-size:0.75rem;color:var(--gray);font-family:'JetBrains Mono',monospace;margin-bottom:2rem;}
@@ -294,7 +325,6 @@ footer{background:var(--navy2);border-top:0.5px solid var(--border2);padding:4re
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#" style="gap:0.5rem;align-items:center;">
-    <span class="logo-word" style="line-height:1;">ATRONUS</span>
     <div class="logo-mark" style="display:flex;align-items:center;">
       <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
         <defs>
@@ -325,6 +355,12 @@ footer{background:var(--navy2);border-top:0.5px solid var(--border2);padding:4re
         <circle cx="32" cy="12" r="6" fill="#050A18"/>
         <circle cx="32" cy="12" r="2.4" fill="#F0B429"/>
       </svg>
+    </div>
+    <div style="display:flex;flex-direction:column;line-height:1;gap:0.2rem;">
+      <span class="logo-word" style="line-height:1;">ATRONUS</span>
+      <span style="font-family:'JetBrains Mono',monospace;font-size:0.52rem;font-weight:400;
+                   letter-spacing:0.18em;color:var(--gold);opacity:0.85;text-transform:uppercase;
+                   line-height:1;">Technologies, Inc.</span>
     </div>
   </a>
   <div class="nav-links" id="nav-links">
@@ -427,7 +463,7 @@ footer{background:var(--navy2);border-top:0.5px solid var(--border2);padding:4re
             <div class="dd-sub">We're here — OmniBot answers instantly</div>
           </div>
         </a>
-        <a class="nav-dropdown-item" href="mailto:info@atronus.com?subject=Expert Consultation Request — Atronus Technologies">
+        <a class="nav-dropdown-item" href="#" onclick="event.preventDefault();openModal('expert');">
           <div class="dd-icon" style="background:rgba(0,212,232,0.1);">📞</div>
           <div>
             <div class="dd-label">Talk with an Expert</div>
@@ -446,7 +482,7 @@ footer{background:var(--navy2);border-top:0.5px solid var(--border2);padding:4re
   <div style="display:flex;align-items:center;gap:1rem;">
     <div class="nav-online"><div class="blink-dot"></div>We're Online</div>
     <button class="nav-mobile-btn" onclick="toggleMobileNav()" id="mob-btn">☰</button>
-    <a href="mailto:info@atronus.com?subject=Demo Request — Atronus Technologies" class="nav-cta">Book a Demo</a>
+    <button onclick="openModal('demo')" class="nav-cta" style="cursor:pointer;border:none;font-family:'DM Sans',sans-serif;">Book a Demo</button>
   </div>
 </nav>
 <div id="mobile-nav" style="display:none;position:fixed;top:68px;left:0;right:0;z-index:998;background:rgba(13,21,38,0.98);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;flex-direction:column;gap:0.25rem;">
@@ -458,9 +494,9 @@ footer{background:var(--navy2);border-top:0.5px solid var(--border2);padding:4re
   <a href="mailto:info@atronus.com?subject=IDVerifyPro Demo" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">🪪 IDVerifyPro — Request Demo</a>
   <a href="https://omniservetexas.com" target="_blank" style="color:var(--gold);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">🏛️ OmniServe Texas ↗</a>
   <div style="font-size:0.62rem;font-family:'JetBrains Mono',monospace;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase;padding:0.65rem 0 0.25rem;opacity:0.7;">Contact Us</div>
-  <a href="mailto:info@atronus.com?subject=Demo Request — Atronus Technologies" style="color:var(--gold);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">📅 Book a Demo</a>
+  <a href="#" onclick="event.preventDefault();closeMobileNav();setTimeout(function(){openModal('demo');},300);" style="color:var(--gold);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">📅 Book a Demo</a>
   <a href="#" onclick="closeMobileNav();setTimeout(function(){var btn=document.getElementById('omnibot-btn');if(btn)btn.click();},300);" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">💬 Chat with Us</a>
-  <a href="mailto:info@atronus.com?subject=Expert Consultation Request" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;display:block;">📞 Talk with an Expert</a>
+  <a href="#" onclick="event.preventDefault();closeMobileNav();setTimeout(function(){openModal('expert');},300);" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;display:block;">📞 Talk with an Expert</a>
 </div>
 
 <!-- HERO -->
@@ -724,7 +760,7 @@ footer{background:var(--navy2);border-top:0.5px solid var(--border2);padding:4re
   <div class="footer-grid">
     <div class="footer-brand">
       <a class="nav-logo" href="#" style="margin-bottom:0.75rem;display:inline-flex;">
-        <div class="logo-mark"><svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="aFontGrad2" x1="21" y1="10" x2="21" y2="34" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFD166"/><stop offset="45%" stop-color="#F0B429"/><stop offset="100%" stop-color="#00D4E8"/></linearGradient></defs><path d="M21 2.5 L37 11.5 L37 29.5 L21 38.5 L5 29.5 L5 11.5 Z" stroke="#00D4E8" stroke-width="1.8" fill="rgba(0,212,232,0.06)"/><line x1="37" y1="11.5" x2="37" y2="29.5" stroke="#00D4E8" stroke-width="3" stroke-linecap="round"/><text x="21" y="31" font-family="Playfair Display, Georgia, serif" font-size="22" font-weight="700" fill="url(#aFontGrad2)" text-anchor="middle">A</text><circle cx="21" cy="13" r="4.5" fill="#F0B429"/><circle cx="21" cy="13" r="2.8" fill="#050A18"/><circle cx="21" cy="13" r="1.2" fill="#F0B429"/><circle cx="37" cy="11.5" r="2" fill="#F0B429" opacity="0.7"/><circle cx="37" cy="29.5" r="2" fill="#00D4E8" opacity="0.7"/></svg></div>
+        <div class="logo-mark"><svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><style>@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400&amp;display=swap');</style></defs><path d="M32 12 L52.8 24 L52.8 48 L32 60 L11.2 48 L11.2 24 Z" fill="none" stroke="#00D4E8" stroke-width="0.8" opacity="0.22"/><path d="M32 18 L47.6 27 L47.6 45 L32 54 L16.4 45 L16.4 27 Z" fill="none" stroke="#00D4E8" stroke-width="1" opacity="0.38"/><path d="M32 24 L42.4 30 L42.4 42 L32 48 L21.6 42 L21.6 30 Z" fill="none" stroke="#F0B429" stroke-width="1.1" opacity="0.55"/><path d="M32 29 L38.1 32.5 L38.1 39.5 L32 43 L25.9 39.5 L25.9 32.5 Z" fill="rgba(0,212,232,0.06)" stroke="#F0B429" stroke-width="1.4" opacity="0.85"/><text x="32" y="41" font-family="'Playfair Display',Georgia,serif" font-size="16" font-weight="400" fill="#00D4E8" text-anchor="middle" opacity="0.95">A</text><circle cx="32" cy="12" r="13" fill="none" stroke="#F0B429" stroke-width="0.5" opacity="0.18"/><circle cx="32" cy="12" r="10" fill="#F0B429"/><circle cx="32" cy="12" r="6" fill="#050A18"/><circle cx="32" cy="12" r="2.4" fill="#F0B429"/></svg></div>
         <span class="logo-word" style="font-size:1.1rem;">ATRONUS</span>
       </a>
       <p>Enterprise AI infrastructure built compliance-first. Parent company of OmniBotX, Risk Intelligence Engine, and OmniServe Texas LLC.</p>
@@ -1069,5 +1105,258 @@ function openOmniBot() {
   }
 }
 </script>
+
+<!-- ── BOOK A DEMO MODAL ───────────────────────────────────── -->
+<div class="modal-overlay" id="modal-demo">
+  <div class="form-modal">
+    <button class="fm-close" onclick="closeModal('demo')">✕</button>
+    <div id="demo-form-wrap">
+      <div class="fm-eyebrow" style="color:var(--gold);">Atronus Technologies</div>
+      <div class="fm-title" style="color:var(--gold);">Book a Demo</div>
+      <div class="fm-sub">See exactly how OmniBotX or the Risk Intelligence Engine works for your business. We'll tailor the demo to your industry.</div>
+      <div class="fm-row">
+        <div class="fm-field">
+          <label class="fm-label">First Name *</label>
+          <input class="fm-input" id="demo-fname" type="text" placeholder="First name"/>
+        </div>
+        <div class="fm-field">
+          <label class="fm-label">Last Name *</label>
+          <input class="fm-input" id="demo-lname" type="text" placeholder="Last name"/>
+        </div>
+      </div>
+      <div class="fm-field">
+        <label class="fm-label">Business Email *</label>
+        <input class="fm-input" id="demo-email" type="email" placeholder="you@yourbusiness.com"/>
+      </div>
+      <div class="fm-row">
+        <div class="fm-field">
+          <label class="fm-label">Company Name</label>
+          <input class="fm-input" id="demo-company" type="text" placeholder="Your company"/>
+        </div>
+        <div class="fm-field">
+          <label class="fm-label">Phone</label>
+          <input class="fm-input" id="demo-phone" type="tel" placeholder="+1 (000) 000-0000"/>
+        </div>
+      </div>
+      <div class="fm-field">
+        <label class="fm-label">Which product interests you? *</label>
+        <select class="fm-input" id="demo-product">
+          <option value="">Select a product...</option>
+          <option value="OmniBotX — AI Chatbot ($69–$399/mo)">🤖 OmniBotX — AI Chatbot ($69–$399/mo)</option>
+          <option value="Risk Intelligence Engine (Enterprise)">🛡️ Risk Intelligence Engine (Enterprise)</option>
+          <option value="IDVerifyPro — Document Verification">🪪 IDVerifyPro — Document Verification</option>
+          <option value="OmniServe Texas — Professional Services">🏛️ OmniServe Texas — Professional Services</option>
+          <option value="Multiple products">Multiple products</option>
+        </select>
+      </div>
+      <div class="fm-field">
+        <label class="fm-label">Industry</label>
+        <select class="fm-input" id="demo-industry">
+          <option value="">Select your industry...</option>
+          <option>Real Estate</option>
+          <option>Healthcare</option>
+          <option>Legal Services</option>
+          <option>Financial Services</option>
+          <option>Retail / E-Commerce</option>
+          <option>Trucking / Logistics</option>
+          <option>Immigration Services</option>
+          <option>Professional Services</option>
+          <option>Technology</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="fm-field">
+        <label class="fm-label">Tell us about your challenge (optional)</label>
+        <textarea class="fm-input" id="demo-message" placeholder="What problem are you trying to solve? Any specific requirements?"></textarea>
+      </div>
+      <div class="fm-err" id="demo-err"></div>
+      <div class="fm-actions">
+        <button class="fm-btn-secondary" onclick="closeModal('demo')">Cancel</button>
+        <button class="fm-btn-primary" id="demo-submit-btn" onclick="submitDemoForm()">Request Demo →</button>
+      </div>
+      <p style="font-size:0.68rem;color:var(--gray);margin-top:0.875rem;text-align:center;font-family:'JetBrains Mono',monospace;">We respond within 24 hours · (713) 609-3516 · info@atronus.com</p>
+    </div>
+    <div class="fm-success" id="demo-success">
+      <div class="fm-success-icon">✅</div>
+      <h3 style="color:var(--gold);">Demo Requested!</h3>
+      <p>Thank you — we'll be in touch within <span class="highlight">24 hours</span> to schedule your personalized demo.<br/><br/>
+      In the meantime, feel free to reach us directly:<br/>
+      <span class="highlight">(713) 609-3516 · info@atronus.com</span></p>
+    </div>
+  </div>
+</div>
+
+<!-- ── TALK WITH AN EXPERT MODAL ─────────────────────────────── -->
+<div class="modal-overlay" id="modal-expert">
+  <div class="form-modal">
+    <button class="fm-close" onclick="closeModal('expert')">✕</button>
+    <div id="expert-form-wrap">
+      <div class="fm-eyebrow" style="color:var(--teal);">Atronus Technologies</div>
+      <div class="fm-title" style="color:var(--teal);">Talk with an Expert</div>
+      <div class="fm-sub">Schedule a free consultation with our team. No obligation — we'll help you figure out the right solution for your business.</div>
+      <div class="fm-row">
+        <div class="fm-field">
+          <label class="fm-label">First Name *</label>
+          <input class="fm-input" id="exp-fname" type="text" placeholder="First name"/>
+        </div>
+        <div class="fm-field">
+          <label class="fm-label">Last Name *</label>
+          <input class="fm-input" id="exp-lname" type="text" placeholder="Last name"/>
+        </div>
+      </div>
+      <div class="fm-field">
+        <label class="fm-label">Email *</label>
+        <input class="fm-input" id="exp-email" type="email" placeholder="you@yourbusiness.com"/>
+      </div>
+      <div class="fm-field">
+        <label class="fm-label">Phone (optional)</label>
+        <input class="fm-input" id="exp-phone" type="tel" placeholder="+1 (000) 000-0000"/>
+      </div>
+      <div class="fm-field">
+        <label class="fm-label">What do you need help with? *</label>
+        <select class="fm-input" id="exp-topic">
+          <option value="">Select a topic...</option>
+          <option>OmniBotX — Setup &amp; Implementation</option>
+          <option>Enterprise AI Strategy</option>
+          <option>Risk Intelligence Engine — Early Access</option>
+          <option>OmniServe Texas — Professional Services</option>
+          <option>Partnership / Reseller Program</option>
+          <option>General Consultation</option>
+        </select>
+      </div>
+      <div class="fm-field">
+        <label class="fm-label">Preferred contact time</label>
+        <select class="fm-input" id="exp-time">
+          <option>Morning — 9am to 12pm CST</option>
+          <option>Afternoon — 12pm to 5pm CST</option>
+          <option>Evening — 5pm to 7pm CST</option>
+          <option>Any time works</option>
+        </select>
+      </div>
+      <div class="fm-field">
+        <label class="fm-label">Additional context (optional)</label>
+        <textarea class="fm-input" id="exp-message" placeholder="Anything else you'd like us to know before the call?"></textarea>
+      </div>
+      <div class="fm-err" id="exp-err"></div>
+      <div class="fm-actions">
+        <button class="fm-btn-secondary" onclick="closeModal('expert')">Cancel</button>
+        <button class="fm-btn-primary" id="exp-submit-btn" onclick="submitExpertForm()" style="background:var(--teal);color:var(--navy);">Schedule Call →</button>
+      </div>
+      <p style="font-size:0.68rem;color:var(--gray);margin-top:0.875rem;text-align:center;font-family:'JetBrains Mono',monospace;">Mon–Sat · 9am–7pm CST · (713) 609-3516</p>
+    </div>
+    <div class="fm-success" id="exp-success">
+      <div class="fm-success-icon">📞</div>
+      <h3 style="color:var(--teal);">Consultation Scheduled!</h3>
+      <p>Perfect — we'll reach out within a few hours to confirm your call.<br/><br/>
+      <span class="highlight">(713) 609-3516 · info@atronus.com</span></p>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Form submission handlers ─────────────────────────────────────
+function submitDemoForm() {
+  var fname   = document.getElementById('demo-fname').value.trim();
+  var lname   = document.getElementById('demo-lname').value.trim();
+  var email   = document.getElementById('demo-email').value.trim();
+  var company = document.getElementById('demo-company').value.trim();
+  var phone   = document.getElementById('demo-phone').value.trim();
+  var product = document.getElementById('demo-product').value;
+  var industry= document.getElementById('demo-industry').value;
+  var message = document.getElementById('demo-message').value.trim();
+  var errEl   = document.getElementById('demo-err');
+  var btn     = document.getElementById('demo-submit-btn');
+
+  errEl.style.display = 'none';
+  if (!fname || !lname) { showErr('demo-err','Please enter your full name.'); return; }
+  if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) { showErr('demo-err','Please enter a valid email address.'); return; }
+  if (!product) { showErr('demo-err','Please select a product.'); return; }
+
+  btn.disabled = true; btn.textContent = 'Sending...';
+
+  var subject = encodeURIComponent('Demo Request — ' + product + ' | ' + fname + ' ' + lname);
+  var body = encodeURIComponent(
+    'Name: ' + fname + ' ' + lname + '
+' +
+    'Email: ' + email + '
+' +
+    'Phone: ' + (phone||'Not provided') + '
+' +
+    'Company: ' + (company||'Not provided') + '
+' +
+    'Product: ' + product + '
+' +
+    'Industry: ' + (industry||'Not specified') + '
+' +
+    'Message: ' + (message||'None') + '
+
+' +
+    '--- Submitted via atronus.com ---'
+  );
+  window.location.href = 'mailto:info@atronus.com?subject=' + subject + '&body=' + body;
+
+  setTimeout(function() {
+    document.getElementById('demo-form-wrap').style.display = 'none';
+    document.getElementById('demo-success').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Request Demo →';
+  }, 400);
+}
+
+function submitExpertForm() {
+  var fname   = document.getElementById('exp-fname').value.trim();
+  var lname   = document.getElementById('exp-lname').value.trim();
+  var email   = document.getElementById('exp-email').value.trim();
+  var phone   = document.getElementById('exp-phone').value.trim();
+  var topic   = document.getElementById('exp-topic').value;
+  var time    = document.getElementById('exp-time').value;
+  var message = document.getElementById('exp-message').value.trim();
+  var btn     = document.getElementById('exp-submit-btn');
+
+  if (!fname || !lname) { showErr('exp-err','Please enter your full name.'); return; }
+  if (!email || !/^[^@]+@[^@]+\.[^@]+$/.test(email)) { showErr('exp-err','Please enter a valid email.'); return; }
+  if (!topic) { showErr('exp-err','Please select a topic.'); return; }
+
+  btn.disabled = true; btn.textContent = 'Sending...';
+
+  var subject = encodeURIComponent('Expert Consultation — ' + topic + ' | ' + fname + ' ' + lname);
+  var body = encodeURIComponent(
+    'Name: ' + fname + ' ' + lname + '
+' +
+    'Email: ' + email + '
+' +
+    'Phone: ' + (phone||'Not provided') + '
+' +
+    'Topic: ' + topic + '
+' +
+    'Preferred time: ' + time + '
+' +
+    'Message: ' + (message||'None') + '
+
+' +
+    '--- Submitted via atronus.com ---'
+  );
+  window.location.href = 'mailto:info@atronus.com?subject=' + subject + '&body=' + body;
+
+  setTimeout(function() {
+    document.getElementById('expert-form-wrap').style.display = 'none';
+    document.getElementById('exp-success').style.display = 'block';
+    btn.disabled = false; btn.textContent = 'Schedule Call →';
+  }, 400);
+}
+
+function showErr(id, msg) {
+  var el = document.getElementById(id);
+  el.textContent = msg;
+  el.style.display = 'block';
+}
+
+// Close on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    ['demo','expert'].forEach(function(id) { closeModal(id); });
+  }
+});
+</script>
+
 </body>
 </html>

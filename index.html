@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="Atronus Technologies — Enterprise AI. Compliance Built In. OmniBotX · Risk Intelligence Engine · OmniServe Texas."/>
+<title>Atronus Technologies — Enterprise AI. Compliance Built In.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=DM+Sans:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"/>
+<style>
+:root{
+  --navy:#050A18;--navy2:#0D1526;--navy3:#162038;--navy4:#1E2E50;
+  --gold:#F0B429;--gold2:#E0A020;--gold-light:#FAD068;
+  --teal:#00D4E8;--teal2:#00B8C8;--teal-glow:rgba(0,212,232,0.12);
+  --white:#FFFFFF;--gray:#8A9BB5;--gray2:#C5CFDE;
+  --green:#22C55E;
+  --border:rgba(0,212,232,0.15);--border-gold:rgba(240,180,41,0.15);--border2:rgba(255,255,255,0.07);
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--navy);color:var(--white);font-family:'DM Sans',sans-serif;font-size:16px;line-height:1.7;overflow-x:hidden;}
+::-webkit-scrollbar{width:3px;}
+::-webkit-scrollbar-track{background:var(--navy);}
+::-webkit-scrollbar-thumb{background:var(--teal);border-radius:2px;}
+
+/* NAV */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;background:rgba(5,10,24,0.94);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border);padding:0 2.5rem;display:flex;align-items:center;justify-content:space-between;height:68px;}
+.nav-logo{display:flex;align-items:center;gap:0.6rem;text-decoration:none;}
+.logo-mark svg{width:38px;height:38px;}
+.logo-word{font-family:'Playfair Display',serif;font-size:1.3rem;font-weight:700;letter-spacing:0.08em;color:var(--teal);}
+.nav-links{display:flex;align-items:center;gap:0.25rem;}
+.nav-item{position:relative;}
+.nav-item>a,.nav-item>span{color:var(--gold);text-decoration:none;font-size:0.8rem;font-weight:500;letter-spacing:0.06em;text-transform:uppercase;transition:color 0.2s;padding:0.5rem 0.75rem;display:flex;align-items:center;gap:0.3rem;cursor:pointer;white-space:nowrap;border-radius:4px;}
+.nav-item>a:hover,.nav-item>span:hover{color:var(--white);background:rgba(240,180,41,0.08);}
+.nav-item .omni-gold{color:var(--gold);}
+.nav-item .rie-badge{font-size:0.55rem;background:rgba(240,180,41,0.15);border:0.5px solid rgba(240,180,41,0.3);color:var(--gold);padding:0.1rem 0.35rem;border-radius:100px;letter-spacing:0.06em;vertical-align:middle;}
+.nav-chevron{font-size:0.55rem;opacity:0.6;transition:transform 0.2s;}
+.nav-item:hover .nav-chevron{transform:rotate(180deg);}
+.nav-dropdown{position:absolute;top:calc(100% + 8px);left:0;background:rgba(13,21,38,0.98);backdrop-filter:blur(20px);border:0.5px solid var(--border);border-radius:10px;min-width:220px;padding:0.5rem;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all 0.2s;z-index:999;}
+.nav-item:hover .nav-dropdown{opacity:1;visibility:visible;transform:translateY(0);}
+.nav-dropdown-item{display:flex;align-items:center;gap:0.75rem;padding:0.65rem 0.875rem;border-radius:6px;text-decoration:none;transition:background 0.15s;cursor:pointer;}
+.nav-dropdown-item:hover{background:rgba(240,180,41,0.07);}
+.nav-dropdown-item .dd-icon{width:28px;height:28px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:0.8rem;flex-shrink:0;}
+.nav-dropdown-item .dd-label{font-size:0.82rem;font-weight:500;color:var(--gold);letter-spacing:0.03em;}
+.nav-dropdown-item .dd-sub{font-size:0.7rem;color:var(--gray);margin-top:1px;}
+.dd-divider{height:0.5px;background:var(--border2);margin:0.4rem 0.875rem;}
+.nav-online{display:flex;align-items:center;gap:0.5rem;font-size:0.7rem;color:var(--gray);font-family:'JetBrains Mono',monospace;white-space:nowrap;}
+.blink-dot{width:7px;height:7px;background:var(--green);border-radius:50%;animation:blink 1.4s infinite;}
+@keyframes blink{0%,100%{opacity:1;box-shadow:0 0 0 0 rgba(34,197,94,0.6);}50%{opacity:0.7;box-shadow:0 0 0 5px rgba(34,197,94,0);}}
+.nav-cta{background:var(--gold);border:none;color:var(--navy);padding:0.45rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:700;text-decoration:none;letter-spacing:0.04em;transition:all 0.2s;white-space:nowrap;}
+.nav-cta .omni{color:var(--navy);}
+.nav-cta:hover{background:var(--gold-light);}
+
+/* ── PRODUCT DROPDOWN PANELS ── */
+.prod-panel{min-width:300px;padding:0!important;}
+.prod-panel-header{padding:1.25rem 1.25rem 1rem;border-bottom:0.5px solid var(--border2);}
+.prod-panel-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.25rem;margin-bottom:0.75rem;}
+.prod-panel-name{font-family:'Playfair Display',serif;font-size:1rem;font-weight:700;margin-bottom:0.2rem;}
+.prod-panel-tag{font-size:0.65rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.1em;text-transform:uppercase;}
+.prod-panel-desc{padding:1rem 1.25rem;font-size:0.8rem;color:var(--gray2);line-height:1.7;}
+.prod-panel-features{padding:0 1.25rem;display:flex;flex-direction:column;gap:0.35rem;margin-bottom:1rem;}
+.prod-panel-feat{font-size:0.75rem;color:var(--gray);display:flex;align-items:flex-start;gap:0.4rem;}
+.prod-panel-feat::before{content:'→';color:var(--teal);flex-shrink:0;font-size:0.7rem;margin-top:0.05rem;}
+.prod-panel-footer{padding:0.875rem 1.25rem;border-top:0.5px solid var(--border2);display:flex;gap:0.5rem;align-items:center;flex-wrap:wrap;}
+.prod-cta-btn{display:inline-flex;align-items:center;gap:0.4rem;padding:0.55rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:600;text-decoration:none;transition:all 0.2s;letter-spacing:0.03em;}
+.prod-cta-gold{background:var(--gold);color:var(--navy);}
+.prod-cta-gold:hover{background:var(--gold-light);}
+.prod-cta-teal{background:rgba(0,212,232,0.12);color:var(--teal);border:0.5px solid rgba(0,212,232,0.25);}
+.prod-cta-teal:hover{background:rgba(0,212,232,0.2);}
+.prod-cta-soon{background:rgba(240,180,41,0.1);color:var(--gold);border:0.5px solid rgba(240,180,41,0.2);}
+.prod-cta-soon:hover{background:rgba(240,180,41,0.18);}
+/* Wide solutions dropdown */
+.solutions-dropdown{min-width:680px!important;display:grid;grid-template-columns:1fr 1fr;gap:0;padding:0!important;}
+.solutions-dropdown .sol-item{padding:1.25rem;border-radius:0;transition:background 0.15s;text-decoration:none;display:block;border-bottom:0.5px solid var(--border2);}
+.solutions-dropdown .sol-item:nth-child(odd){border-right:0.5px solid var(--border2);}
+.solutions-dropdown .sol-item:hover{background:rgba(255,255,255,0.03);}
+.sol-item-head{display:flex;align-items:center;gap:0.75rem;margin-bottom:0.5rem;}
+.sol-icon{width:34px;height:34px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+.sol-name{font-size:0.88rem;font-weight:700;color:var(--white);}
+.sol-badge{font-size:0.6rem;font-family:'JetBrains Mono',monospace;padding:0.15rem 0.45rem;border-radius:100px;letter-spacing:0.08em;text-transform:uppercase;margin-left:0.4rem;vertical-align:middle;}
+.sol-desc{font-size:0.75rem;color:var(--gray);line-height:1.65;margin-bottom:0.65rem;}
+.sol-cta{font-size:0.73rem;font-weight:600;letter-spacing:0.03em;}
+.nav-mobile-btn{display:none;background:none;border:0.5px solid rgba(240,180,41,0.3);color:var(--gold);width:36px;height:36px;border-radius:6px;font-size:1.1rem;cursor:pointer;align-items:center;justify-content:center;}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;text-align:center;padding:7rem 2rem 5rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 50% at 50% 0%,rgba(0,212,232,0.07) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 20% 80%,rgba(240,180,41,0.04) 0%,transparent 60%);}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,212,232,0.04) 1px,transparent 1px),linear-gradient(90deg,rgba(0,212,232,0.04) 1px,transparent 1px);background-size:55px 55px;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 100%);}
+.hero-content{position:relative;max-width:920px;margin:0 auto;}
+.hero-eyebrow{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(0,212,232,0.08);border:0.5px solid rgba(0,212,232,0.25);border-radius:100px;padding:0.4rem 1.1rem;font-size:0.72rem;font-family:'JetBrains Mono',monospace;color:var(--teal);letter-spacing:0.1em;text-transform:uppercase;margin-bottom:2rem;}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(3rem,8vw,6rem);font-weight:900;line-height:1.05;letter-spacing:-0.03em;margin-bottom:1.5rem;}
+.hero h1 .gold{color:var(--gold);}
+.hero h1 .teal{color:var(--teal);}
+.motto{font-size:0.78rem;font-family:'JetBrains Mono',monospace;color:var(--teal);letter-spacing:0.2em;text-transform:uppercase;margin-bottom:1.5rem;opacity:0.8;}
+.hero-sub{font-size:1.1rem;color:var(--gray2);max-width:580px;margin:0 auto 2.5rem;font-weight:300;line-height:1.85;}
+.hero-actions{display:flex;align-items:center;justify-content:center;gap:1rem;flex-wrap:wrap;}
+.btn-primary{background:var(--teal);color:var(--navy);padding:0.85rem 2rem;border-radius:4px;font-weight:600;font-size:0.88rem;text-decoration:none;letter-spacing:0.03em;transition:all 0.2s;border:none;cursor:pointer;font-family:'DM Sans',sans-serif;}
+.btn-primary:hover{background:#00E8FF;transform:translateY(-1px);}
+.btn-gold{background:var(--gold);color:var(--navy);padding:0.85rem 2rem;border-radius:4px;font-weight:600;font-size:0.88rem;text-decoration:none;letter-spacing:0.03em;transition:all 0.2s;}
+.btn-gold .omni{font-weight:700;}
+.btn-gold:hover{background:var(--gold-light);transform:translateY(-1px);}
+.btn-outline{border:0.5px solid rgba(0,212,232,0.35);color:var(--teal);padding:0.85rem 2rem;border-radius:4px;font-weight:500;font-size:0.88rem;text-decoration:none;letter-spacing:0.03em;transition:all 0.2s;}
+.btn-outline:hover{background:rgba(0,212,232,0.07);}
+
+/* TRUST STRIP */
+.trust-strip{background:var(--navy2);border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2);padding:1rem 2rem;display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:2rem;}
+.trust-item{display:flex;align-items:center;gap:0.5rem;font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--gray);letter-spacing:0.08em;text-transform:uppercase;}
+.trust-dot{width:5px;height:5px;background:var(--teal);border-radius:50%;}
+
+/* SECTIONS */
+section{padding:6rem 2rem;}
+.container{max-width:1100px;margin:0 auto;}
+.section-label{font-size:0.7rem;font-family:'JetBrains Mono',monospace;color:var(--teal);letter-spacing:0.15em;text-transform:uppercase;margin-bottom:1rem;}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3.2rem);font-weight:700;line-height:1.1;letter-spacing:-0.02em;margin-bottom:1.25rem;}
+.section-title .gold{color:var(--gold);}
+.section-title .teal{color:var(--teal);}
+.section-sub{font-size:1rem;color:var(--gray2);max-width:580px;font-weight:300;line-height:1.85;}
+
+/* ABOUT */
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center;}
+.about-stats{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:2.5rem;}
+.stat-card{background:var(--navy2);border:0.5px solid var(--border);border-radius:8px;padding:1.25rem;}
+.stat-num{font-family:'Playfair Display',serif;font-size:2.2rem;font-weight:700;color:var(--teal);line-height:1;}
+.stat-label{font-size:0.78rem;color:var(--gray);margin-top:0.25rem;}
+
+/* PRODUCTS */
+.products-section{background:var(--navy2);}
+.products-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:3rem;}
+.product-card{background:var(--navy);border:0.5px solid var(--border2);border-radius:12px;padding:2rem;transition:all 0.3s;position:relative;overflow:hidden;}
+.product-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--teal),var(--gold));transform:scaleX(0);transform-origin:left;transition:transform 0.3s;}
+.product-card:hover::before{transform:scaleX(1);}
+.product-card:hover{border-color:var(--border);transform:translateY(-4px);}
+.product-badge{display:inline-block;font-size:0.67rem;font-family:'JetBrains Mono',monospace;padding:0.22rem 0.7rem;border-radius:100px;margin-bottom:1.25rem;letter-spacing:0.1em;text-transform:uppercase;}
+.badge-live{background:rgba(34,197,94,0.12);color:#4ade80;border:0.5px solid rgba(34,197,94,0.25);}
+.badge-building{background:rgba(240,180,41,0.1);color:var(--gold);border:0.5px solid rgba(240,180,41,0.25);}
+.badge-service{background:rgba(0,212,232,0.1);color:var(--teal);border:0.5px solid rgba(0,212,232,0.25);}
+.product-icon{font-size:1.75rem;margin-bottom:0.75rem;}
+.product-name{font-family:'Playfair Display',serif;font-size:1.4rem;font-weight:700;margin-bottom:0.4rem;}
+.product-name .omni{color:var(--gold);}
+.product-tag{font-size:0.72rem;color:var(--teal);font-family:'JetBrains Mono',monospace;margin-bottom:1rem;letter-spacing:0.05em;}
+.product-desc{color:var(--gray2);font-size:0.88rem;line-height:1.75;margin-bottom:1.5rem;}
+.product-features{list-style:none;margin-bottom:1.5rem;}
+.product-features li{font-size:0.83rem;color:var(--gray);padding:0.28rem 0;padding-left:1rem;position:relative;}
+.product-features li::before{content:'→';position:absolute;left:0;color:var(--teal);font-size:0.72rem;}
+.product-link{display:inline-flex;align-items:center;gap:0.4rem;color:var(--gold);text-decoration:none;font-size:0.83rem;font-weight:500;transition:gap 0.2s;}
+.product-link:hover{gap:0.65rem;}
+
+/* WHY CARDS */
+.why-grid{display:grid;grid-template-columns:1fr;gap:1rem;margin-top:0;}
+.why-card{background:var(--navy2);border:0.5px solid var(--border2);border-radius:8px;padding:1.5rem;transition:border-color 0.3s;}
+.why-card:hover{border-color:var(--border);}
+.why-icon{width:42px;height:42px;background:rgba(0,212,232,0.1);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:0.875rem;}
+.why-title{font-family:'Playfair Display',serif;font-size:1.05rem;font-weight:600;margin-bottom:0.4rem;}
+.why-desc{font-size:0.83rem;color:var(--gray);line-height:1.7;}
+
+/* FOUNDER */
+.founder-section{background:var(--navy2);}
+.founder-grid{display:grid;grid-template-columns:280px 1fr;gap:4rem;align-items:start;}
+.founder-card{background:var(--navy);border:0.5px solid var(--border);border-radius:12px;padding:2rem;text-align:center;}
+.founder-avatar{width:90px;height:90px;border-radius:50%;background:linear-gradient(135deg,var(--teal) 0%,var(--gold) 100%);display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.75rem;font-weight:700;color:var(--navy);margin:0 auto 1rem;}
+.founder-name{font-family:'Playfair Display',serif;font-size:1.2rem;font-weight:700;}
+.founder-title{font-size:0.75rem;color:var(--teal);margin:.2rem 0 1rem;font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;}
+.founder-tags{display:flex;flex-wrap:wrap;gap:0.4rem;justify-content:center;}
+.founder-tag{font-size:0.67rem;background:rgba(255,255,255,0.04);border:0.5px solid var(--border2);border-radius:100px;padding:0.2rem 0.6rem;color:var(--gray2);}
+.founder-bio{color:var(--gray2);font-size:0.92rem;line-height:1.9;}
+.founder-bio p{margin-bottom:1.25rem;}
+.tech-stack{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:1.5rem;}
+.tech-tag{font-size:0.7rem;font-family:'JetBrains Mono',monospace;background:rgba(0,212,232,0.07);border:0.5px solid rgba(0,212,232,0.2);border-radius:4px;padding:0.22rem 0.6rem;color:var(--teal);}
+
+/* COMPLIANCE */
+.compliance-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:1rem;margin-top:3rem;}
+.compliance-card{background:var(--navy2);border:0.5px solid var(--border2);border-radius:8px;padding:1.1rem 1.4rem;display:flex;align-items:center;gap:0.875rem;transition:border-color 0.2s;}
+.compliance-card:hover{border-color:var(--border);}
+.compliance-dot{width:8px;height:8px;background:var(--teal);border-radius:50%;flex-shrink:0;}
+.compliance-name{font-size:0.85rem;font-weight:500;}
+.compliance-desc{font-size:0.7rem;color:var(--gray);margin-top:1px;}
+
+/* CHAT SECTION */
+#chat-section{background:var(--navy2);}
+.chat-wrapper{max-width:680px;margin:3rem auto 0;background:var(--navy);border:0.5px solid var(--border);border-radius:16px;overflow:hidden;box-shadow:0 0 60px rgba(0,212,232,0.06);}
+.chat-header{background:var(--navy3);padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;border-bottom:0.5px solid var(--border2);}
+.chat-header-left{display:flex;align-items:center;gap:0.75rem;}
+.chat-avatar-wrap{width:38px;height:38px;background:linear-gradient(135deg,var(--gold),var(--gold2));border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.1rem;}
+.chat-name{font-weight:500;font-size:0.9rem;}
+.chat-name .omni{color:var(--gold);}
+.chat-status{font-size:0.7rem;font-family:'JetBrains Mono',monospace;display:flex;align-items:center;gap:0.35rem;color:var(--gray);}
+.chat-status-dot{width:6px;height:6px;background:var(--green);border-radius:50%;animation:blink 1.4s infinite;}
+.chat-langs{font-size:0.68rem;font-family:'JetBrains Mono',monospace;color:var(--teal);background:rgba(0,212,232,0.08);border:0.5px solid rgba(0,212,232,0.2);border-radius:100px;padding:0.2rem 0.6rem;}
+.chat-body{padding:1.5rem;height:340px;overflow-y:auto;display:flex;flex-direction:column;gap:0.875rem;}
+.chat-body::-webkit-scrollbar{width:3px;}
+.chat-body::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px;}
+.chat-bubble{background:var(--navy3);border:0.5px solid var(--border2);border-radius:12px 12px 12px 0;padding:0.75rem 1rem;font-size:0.85rem;color:var(--gray2);max-width:88%;line-height:1.65;animation:popIn 0.3s ease;}
+.chat-bubble.user{background:rgba(0,212,232,0.08);border-color:rgba(0,212,232,0.18);border-radius:12px 12px 0 12px;align-self:flex-end;color:var(--white);}
+.chat-bubble strong{color:var(--teal);}
+.chat-bubble .gold{color:var(--gold);}
+@keyframes popIn{from{opacity:0;transform:translateY(8px);}to{opacity:1;transform:translateY(0);}}
+.typing{display:flex;align-items:center;gap:4px;padding:0.75rem 1rem;background:var(--navy3);border:0.5px solid var(--border2);border-radius:12px 12px 12px 0;width:fit-content;}
+.typing span{width:6px;height:6px;background:var(--teal);border-radius:50%;animation:typingDot 1.2s infinite;}
+.typing span:nth-child(2){animation-delay:0.2s;}
+.typing span:nth-child(3){animation-delay:0.4s;}
+@keyframes typingDot{0%,60%,100%{transform:translateY(0);opacity:0.4;}30%{transform:translateY(-4px);opacity:1;}}
+.faq-chips{display:flex;flex-wrap:wrap;gap:0.5rem;margin-top:0.5rem;}
+.faq-chip{background:rgba(0,212,232,0.07);border:0.5px solid rgba(0,212,232,0.2);border-radius:100px;padding:0.3rem 0.75rem;font-size:0.75rem;color:var(--teal);cursor:pointer;transition:all 0.2s;white-space:nowrap;}
+.faq-chip:hover{background:rgba(0,212,232,0.15);}
+.chat-input-row{padding:1rem 1.25rem;border-top:0.5px solid var(--border2);display:flex;gap:0.75rem;background:var(--navy2);}
+.chat-input{flex:1;background:var(--navy);border:0.5px solid var(--border2);border-radius:8px;padding:0.65rem 1rem;color:var(--white);font-family:'DM Sans',sans-serif;font-size:0.85rem;outline:none;transition:border-color 0.2s;}
+.chat-input:focus{border-color:var(--teal);}
+.chat-input::placeholder{color:var(--gray);}
+.chat-send{background:var(--gold);border:none;border-radius:8px;width:38px;height:38px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:background 0.2s;flex-shrink:0;}
+.chat-send:hover{background:var(--gold-light);}
+.chat-disclaimer{text-align:center;font-size:0.68rem;color:var(--gray);font-family:'JetBrains Mono',monospace;margin-top:0.875rem;letter-spacing:0.04em;}
+
+/* CTA */
+.cta-section{text-align:center;border-top:0.5px solid var(--border2);border-bottom:0.5px solid var(--border2);}
+
+/* FOOTER */
+footer{background:var(--navy2);border-top:0.5px solid var(--border2);padding:4rem 2rem 2rem;}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:3rem;max-width:1100px;margin:0 auto 3rem;}
+.footer-brand p{font-size:0.83rem;color:var(--gray);line-height:1.7;max-width:270px;margin:0.75rem 0 1rem;}
+.footer-col h4{font-size:0.68rem;font-family:'JetBrains Mono',monospace;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase;margin-bottom:1rem;}
+.footer-col a{display:block;color:var(--gray);text-decoration:none;font-size:0.83rem;margin-bottom:0.5rem;transition:color 0.2s;}
+.footer-col a:hover{color:var(--white);}
+.footer-bottom{max-width:1100px;margin:0 auto;padding-top:2rem;border-top:0.5px solid var(--border2);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-copy{font-size:0.75rem;color:var(--gray);}
+.footer-legal{display:flex;gap:1.5rem;}
+.footer-legal a{font-size:0.75rem;color:var(--gray);text-decoration:none;}
+.footer-legal a:hover{color:var(--teal);}
+.comp-badges{display:flex;flex-wrap:wrap;gap:0.4rem;margin-top:0.75rem;}
+.comp-badge{font-size:0.62rem;font-family:'JetBrains Mono',monospace;background:rgba(0,212,232,0.07);border:0.5px solid rgba(0,212,232,0.18);border-radius:3px;padding:0.15rem 0.5rem;color:var(--teal);}
+
+/* COOKIE */
+#cookie-banner{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:rgba(13,21,38,0.98);backdrop-filter:blur(20px);border-top:0.5px solid var(--border);padding:1.5rem 2rem;display:flex;align-items:flex-start;justify-content:space-between;gap:2rem;flex-wrap:wrap;transform:translateY(100%);transition:transform 0.4s ease;}
+#cookie-banner.show{transform:translateY(0);}
+.cookie-left h4{font-family:'Playfair Display',serif;font-size:1rem;margin-bottom:0.4rem;}
+.cookie-left p{font-size:0.8rem;color:var(--gray2);max-width:580px;line-height:1.6;}
+.cookie-toggles{display:flex;flex-wrap:wrap;gap:1.25rem;margin-top:0.875rem;}
+.cookie-toggle{display:flex;align-items:center;gap:0.5rem;font-size:0.78rem;color:var(--gray2);cursor:pointer;}
+.toggle-sw{position:relative;width:34px;height:18px;background:var(--navy4);border:0.5px solid var(--border2);border-radius:9px;cursor:pointer;transition:background 0.2s;flex-shrink:0;}
+.toggle-sw.on{background:var(--teal);}
+.toggle-sw::after{content:'';position:absolute;top:2px;left:2px;width:14px;height:14px;background:var(--white);border-radius:50%;transition:transform 0.2s;}
+.toggle-sw.on::after{transform:translateX(16px);}
+.toggle-sw.locked{opacity:0.4;cursor:not-allowed;}
+.cookie-actions{display:flex;gap:0.75rem;align-items:center;flex-shrink:0;flex-wrap:wrap;}
+.ck-btn{padding:0.55rem 1.1rem;border-radius:4px;font-size:0.78rem;font-weight:500;cursor:pointer;letter-spacing:0.04em;text-transform:uppercase;transition:all 0.2s;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.ck-accept{background:var(--teal);color:var(--navy);border:none;}
+.ck-accept:hover{background:#00E8FF;}
+.ck-reject{background:transparent;color:var(--gray);border:0.5px solid var(--border2);}
+.ck-reject:hover{color:var(--white);}
+.ck-save{background:transparent;color:var(--teal);border:0.5px solid rgba(0,212,232,0.3);}
+.ck-save:hover{background:var(--teal-glow);}
+.ccpa-link{font-size:0.72rem;color:var(--gray);text-decoration:underline;cursor:pointer;margin-top:0.5rem;display:block;}
+
+/* MODALS */
+.modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(5,10,24,0.96);display:none;align-items:center;justify-content:center;padding:2rem;}
+.modal-overlay.show{display:flex;}
+.modal-box{background:var(--navy2);border:0.5px solid var(--border);border-radius:12px;max-width:780px;width:100%;max-height:82vh;overflow-y:auto;padding:2.5rem;}
+.modal-box h2{font-family:'Playfair Display',serif;font-size:1.7rem;margin-bottom:0.4rem;}
+.modal-meta{font-size:0.75rem;color:var(--gray);font-family:'JetBrains Mono',monospace;margin-bottom:2rem;}
+.modal-box h3{font-size:0.9rem;font-weight:600;margin:1.5rem 0 0.5rem;color:var(--teal);font-family:'JetBrains Mono',monospace;letter-spacing:0.05em;text-transform:uppercase;}
+.modal-box p{font-size:0.86rem;color:var(--gray2);line-height:1.8;margin-bottom:0.75rem;}
+.modal-box ul{margin-left:1.25rem;margin-bottom:0.75rem;}
+.modal-box ul li{font-size:0.86rem;color:var(--gray2);line-height:1.8;}
+.modal-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:2rem;}
+.modal-close-btn{background:transparent;border:0.5px solid var(--border2);color:var(--gray);padding:0.4rem 1rem;border-radius:4px;cursor:pointer;font-size:0.78rem;transition:all 0.2s;}
+.modal-close-btn:hover{color:var(--white);}
+
+/* FADE IN */
+.fade-in{opacity:0;transform:translateY(20px);transition:opacity 0.65s ease,transform 0.65s ease;}
+.fade-in.visible{opacity:1;transform:translateY(0);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .about-grid,.founder-grid{grid-template-columns:1fr;}
+  .footer-grid{grid-template-columns:1fr 1fr;}
+}
+@media(max-width:1024px){
+  .nav-item>a,.nav-item>span{font-size:0.72rem;padding:0.4rem 0.5rem;}
+}
+@media(max-width:768px){
+  #nav-links{display:none!important;}
+  .nav-mobile-btn{display:flex!important;}
+  .nav-online{display:none;}
+  .footer-grid{grid-template-columns:1fr;}
+  #cookie-banner{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#" style="gap:0.5rem;align-items:center;">
+    <span class="logo-word" style="line-height:1;">ATRONUS</span>
+    <div class="logo-mark" style="display:flex;align-items:center;">
+      <svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+        <defs>
+          <!-- Gold-to-teal gradient for the Playfair A letter -->
+          <linearGradient id="aFontGrad" x1="21" y1="10" x2="21" y2="34" gradientUnits="userSpaceOnUse">
+            <stop offset="0%" stop-color="#FFD166"/>
+            <stop offset="45%" stop-color="#F0B429"/>
+            <stop offset="100%" stop-color="#00D4E8"/>
+          </linearGradient>
+        </defs>
+
+        <!-- Outer hexagon frame — thicker strokes -->
+        <path d="M21 2.5 L37 11.5 L37 29.5 L21 38.5 L5 29.5 L5 11.5 Z"
+              stroke="#00D4E8" stroke-width="1.8" fill="rgba(0,212,232,0.06)"/>
+
+        <!-- Inner hex ring — depth -->
+        <path d="M21 8 L32 14 L32 28 L21 34 L10 28 L10 14 Z"
+              stroke="rgba(0,212,232,0.15)" stroke-width="0.6" fill="none"/>
+
+        <!-- Right vertical side — emphasized, thicker -->
+        <line x1="37" y1="11.5" x2="37" y2="29.5"
+              stroke="#00D4E8" stroke-width="3" stroke-linecap="round"/>
+
+        <!-- Playfair Display "A" — elegant serif, gold-to-teal gradient -->
+        <!-- font-size 24, baseline y=34 → apex of A at approx y=13 -->
+        <text x="21" y="34"
+              font-family="Playfair Display, Georgia, serif"
+              font-size="24" font-weight="700"
+              fill="url(#aFontGrad)"
+              text-anchor="middle"
+              dominant-baseline="auto">A</text>
+
+        <!-- Gold knowledge circle — sits precisely at apex of the A -->
+        <!-- cy=13 aligns with cap-height of Playfair A at size 24 -->
+        <circle cx="21" cy="13" r="4.5" fill="#F0B429"/>
+        <circle cx="21" cy="13" r="2.8" fill="#050A18"/>
+        <circle cx="21" cy="13" r="1.2" fill="#F0B429"/>
+
+        <!-- Right vertex accents — gold top, teal bottom -->
+        <circle cx="37" cy="11.5" r="2" fill="#F0B429" opacity="0.7"/>
+        <circle cx="37" cy="29.5" r="2" fill="#00D4E8" opacity="0.7"/>
+
+        <!-- Left vertices — subtle -->
+        <circle cx="5" cy="11.5" r="1.2" fill="#00D4E8" opacity="0.25"/>
+        <circle cx="5" cy="29.5" r="1.2" fill="#00D4E8" opacity="0.25"/>
+        <circle cx="21" cy="38.5" r="1.2" fill="#00D4E8" opacity="0.25"/>
+      </svg>
+    </div>
+  </a>
+  <div class="nav-links" id="nav-links">
+
+    <!-- SOLUTIONS / SECTORS -->
+    <div class="nav-item">
+      <span>Solutions <span class="nav-chevron">▾</span></span>
+      <div class="nav-dropdown solutions-dropdown">
+
+        <!-- OmniBotX -->
+        <a class="sol-item" href="https://omnibotx.ai" target="_blank">
+          <div class="sol-item-head">
+            <div class="sol-icon" style="background:rgba(240,180,41,0.12);">🤖</div>
+            <div>
+              <div class="sol-name"><span style="color:var(--gold)">Omni</span>Bot<span style="color:var(--teal)">X</span>
+                <span class="sol-badge" style="background:rgba(34,197,94,0.12);color:#4ade80;border:0.5px solid rgba(34,197,94,0.25);">Live</span>
+              </div>
+            </div>
+          </div>
+          <div class="sol-desc">Multilingual AI chatbot for multicultural businesses. 100+ languages, lead capture, 24/7 — from $69/mo.</div>
+          <div class="sol-cta" style="color:var(--gold);">Try OmniBotX →</div>
+        </a>
+
+        <!-- Risk Intelligence Engine -->
+        <a class="sol-item" href="mailto:info@atronus.com?subject=Risk Intelligence Engine — Early Access">
+          <div class="sol-item-head">
+            <div class="sol-icon" style="background:rgba(167,139,250,0.12);">🛡️</div>
+            <div>
+              <div class="sol-name">Risk Intelligence Engine
+                <span class="sol-badge" style="background:rgba(240,180,41,0.1);color:var(--gold);border:0.5px solid rgba(240,180,41,0.2);">◈ RIE</span>
+              </div>
+            </div>
+          </div>
+          <div class="sol-desc">Enterprise AI risk assessment across 5 jurisdictions. Fraud detection, compliance, institutional deployments.</div>
+          <div class="sol-cta" style="color:var(--teal);">Request Early Access →</div>
+        </a>
+
+        <!-- IDVerifyPro -->
+        <a class="sol-item" href="mailto:info@atronus.com?subject=IDVerifyPro — Demo Request">
+          <div class="sol-item-head">
+            <div class="sol-icon" style="background:rgba(0,212,232,0.1);">🪪</div>
+            <div>
+              <div class="sol-name">IDVerify<span style="color:var(--teal)">Pro</span>
+                <span class="sol-badge" style="background:rgba(240,180,41,0.1);color:var(--gold);border:0.5px solid rgba(240,180,41,0.2);">Soon</span>
+              </div>
+            </div>
+          </div>
+          <div class="sol-desc">AI-powered identity & document verification. Passport, ID, biometric liveness detection, fraud scoring.</div>
+          <div class="sol-cta" style="color:var(--teal);">Request a Demo →</div>
+        </a>
+
+        <!-- OmniServe Texas -->
+        <a class="sol-item" href="https://omniservetexas.com" target="_blank">
+          <div class="sol-item-head">
+            <div class="sol-icon" style="background:rgba(240,180,41,0.1);">🏛️</div>
+            <div>
+              <div class="sol-name"><span style="color:var(--gold)">Omni</span>Serve Texas
+                <span class="sol-badge" style="background:rgba(34,197,94,0.12);color:#4ade80;border:0.5px solid rgba(34,197,94,0.25);">Live</span>
+              </div>
+            </div>
+          </div>
+          <div class="sol-desc">Professional services for multicultural communities. Notary, POA, tax, IFTA, translation in 40+ languages.</div>
+          <div class="sol-cta" style="color:var(--gold);">Visit OmniServe Texas →</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ABOUT — Our Story + Founder combined -->
+    <div class="nav-item">
+      <span>About <span class="nav-chevron">▾</span></span>
+      <div class="nav-dropdown">
+        <a class="nav-dropdown-item" href="#about">
+          <div class="dd-icon" style="background:rgba(0,212,232,0.1);">◎</div>
+          <div><div class="dd-label">Our Story</div><div class="dd-sub">Who we are & our mission</div></div>
+        </a>
+        <a class="nav-dropdown-item" href="#founder">
+          <div class="dd-icon" style="background:rgba(240,180,41,0.1);">👤</div>
+          <div><div class="dd-label">Founder</div><div class="dd-sub">Dinksew Aweke · Ex-Accenture</div></div>
+        </a>
+        <a class="nav-dropdown-item" href="#compliance">
+          <div class="dd-icon" style="background:rgba(0,212,232,0.1);">🛡️</div>
+          <div><div class="dd-label">Compliance</div><div class="dd-sub">CCPA · GDPR · FCRA · SOC 2</div></div>
+        </a>
+        <a class="nav-dropdown-item" href="#products">
+          <div class="dd-icon" style="background:rgba(240,180,41,0.08);">📐</div>
+          <div><div class="dd-label">Our Portfolio</div><div class="dd-sub">Three businesses · One platform</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- CONTACT US -->
+    <div class="nav-item">
+      <span>Contact Us <span class="nav-chevron">▾</span></span>
+      <div class="nav-dropdown" style="left:auto;right:0;min-width:260px;">
+        <a class="nav-dropdown-item" href="#" onclick="event.preventDefault();var btn=document.getElementById('omnibot-btn');if(btn){btn.click();}else{window.scrollTo({top:document.getElementById('chat-section')?.offsetTop||0,behavior:'smooth'});}">
+          <div class="dd-icon" style="background:rgba(240,180,41,0.12);">💬</div>
+          <div>
+            <div class="dd-label">Chat with Us</div>
+            <div class="dd-sub">We're here — OmniBot answers instantly</div>
+          </div>
+        </a>
+        <a class="nav-dropdown-item" href="mailto:info@atronus.com?subject=Expert Consultation Request — Atronus Technologies">
+          <div class="dd-icon" style="background:rgba(0,212,232,0.1);">📞</div>
+          <div>
+            <div class="dd-label">Talk with an Expert</div>
+            <div class="dd-sub">Schedule a consultation · (713) 609-3516</div>
+          </div>
+        </a>
+        <div class="dd-divider"></div>
+        <div class="nav-dropdown-item" style="pointer-events:none;">
+          <div class="dd-icon" style="background:rgba(255,255,255,0.04);">📍</div>
+          <div><div class="dd-label" style="color:var(--gray);">Pearland, TX</div><div class="dd-sub">Mon–Sat · 9am–7pm CST</div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div style="display:flex;align-items:center;gap:1rem;">
+    <div class="nav-online"><div class="blink-dot"></div>We're Online</div>
+    <button class="nav-mobile-btn" onclick="toggleMobileNav()" id="mob-btn">☰</button>
+    <a href="mailto:info@atronus.com?subject=Demo Request — Atronus Technologies" class="nav-cta">Book a Demo</a>
+  </div>
+</nav>
+<div id="mobile-nav" style="display:none;position:fixed;top:68px;left:0;right:0;z-index:998;background:rgba(13,21,38,0.98);backdrop-filter:blur(20px);border-bottom:0.5px solid var(--border);padding:1rem 1.5rem;flex-direction:column;gap:0.25rem;">
+  <a href="#about" style="color:var(--gold);text-decoration:none;font-size:0.9rem;padding:0.65rem 0;border-bottom:0.5px solid var(--border2);display:block;" onclick="closeMobileNav()">About</a>
+  <a href="#founder" style="color:var(--gold);text-decoration:none;font-size:0.9rem;padding:0.65rem 0;border-bottom:0.5px solid var(--border2);display:block;" onclick="closeMobileNav()">Founder</a>
+  <div style="font-size:0.62rem;font-family:'JetBrains Mono',monospace;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase;padding:0.5rem 0 0.25rem;opacity:0.7;">Solutions</div>
+  <a href="https://omnibotx.ai" target="_blank" style="color:var(--gold);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">🤖 OmniBotX — AI Chatbot ↗</a>
+  <a href="mailto:info@atronus.com?subject=RIE Early Access" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">🛡️ Risk Intelligence Engine — Early Access</a>
+  <a href="mailto:info@atronus.com?subject=IDVerifyPro Demo" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">🪪 IDVerifyPro — Request Demo</a>
+  <a href="https://omniservetexas.com" target="_blank" style="color:var(--gold);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">🏛️ OmniServe Texas ↗</a>
+  <div style="font-size:0.62rem;font-family:'JetBrains Mono',monospace;color:var(--teal);letter-spacing:0.12em;text-transform:uppercase;padding:0.65rem 0 0.25rem;opacity:0.7;">Contact Us</div>
+  <a href="mailto:info@atronus.com?subject=Demo Request — Atronus Technologies" style="color:var(--gold);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">📅 Book a Demo</a>
+  <a href="#" onclick="closeMobileNav();setTimeout(function(){var btn=document.getElementById('omnibot-btn');if(btn)btn.click();},300);" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;border-bottom:0.5px solid var(--border2);display:block;">💬 Chat with Us</a>
+  <a href="mailto:info@atronus.com?subject=Expert Consultation Request" style="color:rgba(255,255,255,0.7);text-decoration:none;font-size:0.88rem;padding:0.55rem 0;display:block;">📞 Talk with an Expert</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" style="position:relative;">
+  <canvas id="hero-canvas" style="position:absolute;inset:0;width:100%;height:100%;z-index:0;"></canvas>
+  <div class="hero-bg" style="z-index:1;"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow"><div class="blink-dot" style="width:6px;height:6px;"></div>Atronus Technologies, Inc.</div>
+    <h1>Enterprise AI.<br/><span class="gold">Compliance</span> <span class="teal">Built In.</span></h1>
+    <p class="motto">Intelligence · Integrity · Infrastructure</p>
+    <p class="hero-sub">We build AI infrastructure that global enterprises actually trust — multilingual, compliant, and production-ready from day one.</p>
+    <div class="hero-actions">
+      <a href="https://omnibotx.ai" target="_blank" class="btn-gold">Try <span class="omni">Omni</span>BotX Free</a>
+      <a href="#chat-section" class="btn-outline">Chat With Us</a>
+      <a href="#products" class="btn-primary">View Products</a>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST STRIP -->
+<div class="trust-strip">
+  <div class="trust-item"><div class="trust-dot"></div>CA SB 942 AI Disclosure</div>
+  <div class="trust-item"><div class="trust-dot"></div>CCPA Compliant</div>
+  <div class="trust-item"><div class="trust-dot"></div>GDPR Ready</div>
+  <div class="trust-item"><div class="trust-dot"></div>SOC 2 Aligned</div>
+  <div class="trust-item"><div class="trust-dot"></div>FCRA Compliant</div>
+  <div class="trust-item"><div class="trust-dot"></div>Stripe PCI DSS L1</div>
+  <div class="trust-item"><div class="trust-dot"></div>5-Jurisdiction Coverage</div>
+  <div class="trust-item"><div class="trust-dot"></div>100+ Languages</div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+      <div class="fade-in">
+        <div class="section-label">Who We Are</div>
+        <h2 class="section-title">AI Infrastructure<br/>Built for the <span class="teal">Real World</span></h2>
+        <p class="section-sub">Atronus Technologies is an enterprise AI company founded by a former Accenture Healthcare IT Security consultant. Every product we build starts with compliance — not as a feature, but as the foundation.</p>
+        <div class="about-stats">
+          <div class="stat-card"><div class="stat-num">100+</div><div class="stat-label">Languages Supported</div></div>
+          <div class="stat-card"><div class="stat-num">5</div><div class="stat-label">Global Jurisdictions</div></div>
+          <div class="stat-card"><div class="stat-num">70+</div><div class="stat-label">AI Workflow Nodes</div></div>
+          <div class="stat-card"><div class="stat-num">24/7</div><div class="stat-label">AI-Powered Support</div></div>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="why-grid">
+          <div class="why-card">
+            <div class="why-icon">🛡️</div>
+            <div class="why-title">Security-First Architecture</div>
+            <div class="why-desc">Built by a former enterprise IAM and DLP specialist. Security is not bolted on — it is the foundation every product is built upon.</div>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">🌍</div>
+            <div class="why-title">Globally Compliant by Design</div>
+            <div class="why-desc">CCPA, GDPR, FCRA, BIPA, PIPEDA — multi-jurisdiction compliance built into every product from day one, not added as an afterthought.</div>
+          </div>
+          <div class="why-card">
+            <div class="why-icon">⚡</div>
+            <div class="why-title">AI-Native from Day One</div>
+            <div class="why-desc">Claude API, Google Cloud Vision OCR, biometric liveness, mobile-first design — real AI infrastructure, not wrapper products.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section id="products" class="products-section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto 1rem;">
+      <div class="section-label">Our Products</div>
+      <h2 class="section-title">Three Platforms.<br/><span class="gold">One Mission.</span></h2>
+      <p class="section-sub">Built for businesses that cannot afford to get compliance wrong.</p>
+    </div>
+    <div class="products-grid">
+      <div class="product-card fade-in">
+        <span class="product-badge badge-live">Live Now</span>
+        <div class="product-icon">🤖</div>
+        <div class="product-name"><span class="omni">Omni</span>BotX</div>
+        <div class="product-tag">omnibotx.ai · AI Chatbot SaaS</div>
+        <p class="product-desc">AI-powered multilingual chatbot serving businesses in 100+ languages. CCPA, GDPR, and CA SB 942 compliant. Any channel, any language, any size.</p>
+        <ul class="product-features">
+          <li>100+ languages with RTL support</li>
+          <li>Auto script-family detection (13 families)</li>
+          <li>CCPA · GDPR · SOC 2 · CA SB 942</li>
+          <li>WhatsApp, SMS, Web, Email channels</li>
+          <li>Mobile-first · White-label ready</li>
+          <li>From $69/month · Enterprise $399/mo</li>
+        </ul>
+        <a href="https://omnibotx.ai" target="_blank" class="product-link">Visit OmniBotX →</a>
+      </div>
+      <div class="product-card fade-in">
+        <span class="product-badge badge-building">Launching Soon</span>
+        <div class="product-icon">🔍</div>
+        <div class="product-name">Risk Intelligence Engine</div>
+        <div class="product-tag">idverifypro.ai · Enterprise Platform</div>
+        <p class="product-desc">Enterprise AI risk and identity verification. AI document analysis, biometric liveness, fraud risk scoring — mobile-first, built for real estate and healthcare.</p>
+        <ul class="product-features">
+          <li>AI-powered doc verification (Claude API)</li>
+          <li>Google Cloud Vision OCR</li>
+          <li>Biometric liveness detection</li>
+          <li>Multi-signal fraud risk scoring</li>
+          <li>5-jurisdiction compliance framework</li>
+          <li>Tenant, PM & platform admin portals</li>
+        </ul>
+        <a href="#chat-section" class="product-link">Request Early Access →</a>
+      </div>
+      <div class="product-card fade-in">
+        <span class="product-badge badge-service">Live · Services</span>
+        <div class="product-icon">📋</div>
+        <div class="product-name"><span class="omni">Omni</span>Serve Texas</div>
+        <div class="product-tag">omniservetexas.com · Professional Services</div>
+        <p class="product-desc">Professional document services in 100+ languages — notary, RON, POA, translation, tax, IFTA, bookkeeping and loan signing nationwide.</p>
+        <ul class="product-features">
+          <li>Mobile & Remote Online Notary (RON)</li>
+          <li>Ethiopian & African POA specialist</li>
+          <li>Translation in 100+ languages</li>
+          <li>IFTA · Tax · Bookkeeping services</li>
+          <li>IRS Authorized · E&O Insured</li>
+          <li>Texas-based · Serving Nationally</li>
+        </ul>
+        <a href="https://omniservetexas.com" target="_blank" class="product-link">Visit OmniServe Texas →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHAT SECTION -->
+<section id="chat-section">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;max-width:600px;margin:0 auto;">
+      <div class="section-label">Talk To Us — Live AI Assistant</div>
+      <h2 class="section-title">Get Answers <span class="gold">Instantly</span></h2>
+      <p class="section-sub" style="margin:0 auto;">Ask about OmniBotX, OmniServe Texas services, Risk Intelligence Engine, pricing, partnerships, or compliance — in any language.</p>
+    </div>
+    <div class="chat-wrapper fade-in">
+      <div class="chat-header">
+        <div class="chat-header-left">
+          <div class="chat-avatar-wrap">🤖</div>
+          <div>
+            <div class="chat-name"><span class="omni">Omni</span>BotX — Atronus AI</div>
+            <div class="chat-status"><div class="chat-status-dot"></div>Online · 100+ languages</div>
+          </div>
+        </div>
+        <div class="chat-langs">CA SB 942 · AI Disclosed</div>
+      </div>
+      <div class="chat-body" id="chat-body">
+        <div class="chat-bubble">
+          Welcome to <strong>Atronus Technologies</strong>! I'm your AI assistant — powered by <span class="gold">OmniBotX</span>.<br/><br/>
+          I can answer questions about our products, services, pricing, compliance, and partnerships. What would you like to know?
+        </div>
+        <div class="faq-chips">
+          <span class="faq-chip" onclick="askFAQ(this)">OmniBotX pricing</span>
+          <span class="faq-chip" onclick="askFAQ(this)">Notary services</span>
+          <span class="faq-chip" onclick="askFAQ(this)">POA services</span>
+          <span class="faq-chip" onclick="askFAQ(this)">White-label chatbot</span>
+          <span class="faq-chip" onclick="askFAQ(this)">Risk Intelligence Engine</span>
+          <span class="faq-chip" onclick="askFAQ(this)">IFTA & Tax services</span>
+          <span class="faq-chip" onclick="askFAQ(this)">Translation services</span>
+          <span class="faq-chip" onclick="askFAQ(this)">Book appointment</span>
+        </div>
+      </div>
+      <div class="chat-input-row">
+        <input type="text" class="chat-input" id="chat-input" placeholder="Ask anything — we answer in 100+ languages..."/>
+        <button class="chat-send" onclick="sendChat()">➤</button>
+      </div>
+    </div>
+    <p class="chat-disclaimer">Powered by OmniBotX · CA SB 942: You are interacting with an AI assistant · Atronus Technologies, Inc.</p>
+  </div>
+</section>
+
+<!-- FOUNDER -->
+<section id="founder" class="founder-section">
+  <div class="container">
+    <div class="fade-in" style="margin-bottom:3rem;">
+      <div class="section-label">Leadership</div>
+      <h2 class="section-title">Built by a <span class="teal">Rare Combination</span></h2>
+    </div>
+    <div class="founder-grid">
+      <div class="founder-card fade-in">
+        <div class="founder-avatar">DA</div>
+        <div class="founder-name">Dinksew Aweke</div>
+        <div class="founder-title">Founder & CEO · Atronus Technologies</div>
+        <div class="founder-tags">
+          <span class="founder-tag">Ex-Accenture</span>
+          <span class="founder-tag">Healthcare IT Security</span>
+          <span class="founder-tag">MS Computer Science</span>
+          <span class="founder-tag">MBA</span>
+          <span class="founder-tag">BS Industrial Chemistry</span>
+          <span class="founder-tag">ISO 9001 · 17025</span>
+          <span class="founder-tag">AI Architect</span>
+          <span class="founder-tag">Houston, TX</span>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="founder-bio">
+          <p>With 6 years at Accenture securing enterprise healthcare systems — Identity Access Management, Data Loss Prevention, and security policy for organizations where a breach meant lives at risk — Dinksew brings a compliance-first mindset to every line of code.</p>
+          <p>After Accenture, Dinksew built Atronus Technologies from the ground up — personally designing a 70-node AI verification workflow, integrating Claude API and Google Cloud Vision OCR for document intelligence, building biometric liveness detection and multi-signal fraud risk scoring, and deploying enterprise infrastructure on Cloudflare Workers and Pages.</p>
+          <p>The combination is genuinely rare: industrial chemistry rigor, computer science engineering, business strategy, and enterprise security — applied to building AI products that global enterprises can actually trust.</p>
+        </div>
+        <div class="tech-stack">
+          <span class="tech-tag">Claude API</span>
+          <span class="tech-tag">Google Cloud Vision</span>
+          <span class="tech-tag">n8n Automation</span>
+          <span class="tech-tag">Supabase</span>
+          <span class="tech-tag">Cloudflare Workers</span>
+          <span class="tech-tag">Next.js · React</span>
+          <span class="tech-tag">Stripe PCI DSS</span>
+          <span class="tech-tag">Biometric Verification</span>
+          <span class="tech-tag">Fraud Risk Scoring</span>
+          <span class="tech-tag">Mobile-First Architecture</span>
+          <span class="tech-tag">FCRA · BIPA · PIPEDA · GDPR</span>
+          <span class="tech-tag">IAM · DLP · Security Policy</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COMPLIANCE -->
+<section id="compliance" style="background:var(--navy2);">
+  <div class="container">
+    <div class="fade-in" style="text-align:center;max-width:580px;margin:0 auto;">
+      <div class="section-label">Compliance Framework</div>
+      <h2 class="section-title">Compliance is Not a<br/><span class="teal">Feature.</span> <span class="gold">It's the Foundation.</span></h2>
+    </div>
+    <div class="compliance-grid fade-in">
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">CCPA</div><div class="compliance-desc">California Consumer Privacy Act</div></div></div>
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">GDPR</div><div class="compliance-desc">EU General Data Protection Regulation</div></div></div>
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">FCRA</div><div class="compliance-desc">Fair Credit Reporting Act</div></div></div>
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">BIPA</div><div class="compliance-desc">Biometric Information Privacy Act</div></div></div>
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">PIPEDA</div><div class="compliance-desc">Canadian Privacy Law</div></div></div>
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">CA SB 942</div><div class="compliance-desc">California AI Transparency Act</div></div></div>
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">SOC 2 Aligned</div><div class="compliance-desc">Security & Availability</div></div></div>
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">PCI DSS L1</div><div class="compliance-desc">Stripe Payment Security</div></div></div>
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">Fair Housing Act</div><div class="compliance-desc">Anti-Discrimination Compliance</div></div></div>
+      <div class="compliance-card"><div class="compliance-dot"></div><div><div class="compliance-name">Right to Rent</div><div class="compliance-desc">UK Compliance Framework</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="container fade-in" style="text-align:center;max-width:680px;margin:0 auto;">
+    <div class="section-label">Get Started Today</div>
+    <h2 class="section-title">Ready to Build with<br/><span class="gold">Compliant AI?</span></h2>
+    <p class="section-sub" style="margin:0 auto 2.5rem;">Join businesses using OmniBotX to serve customers in every language. Contact us for enterprise partnerships or Risk Intelligence Engine early access.</p>
+    <div class="hero-actions">
+      <a href="https://omnibotx.ai" target="_blank" class="btn-gold">Try <span class="omni">Omni</span>BotX Free</a>
+      <a href="mailto:info@omniservetexas.com" class="btn-primary">Enterprise Sales</a>
+      <a href="https://omniservetexas.com" target="_blank" class="btn-outline">OmniServe Texas</a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a class="nav-logo" href="#" style="margin-bottom:0.75rem;display:inline-flex;">
+        <div class="logo-mark"><svg viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg"><defs><linearGradient id="aFontGrad2" x1="21" y1="10" x2="21" y2="34" gradientUnits="userSpaceOnUse"><stop offset="0%" stop-color="#FFD166"/><stop offset="45%" stop-color="#F0B429"/><stop offset="100%" stop-color="#00D4E8"/></linearGradient></defs><path d="M21 2.5 L37 11.5 L37 29.5 L21 38.5 L5 29.5 L5 11.5 Z" stroke="#00D4E8" stroke-width="1.8" fill="rgba(0,212,232,0.06)"/><line x1="37" y1="11.5" x2="37" y2="29.5" stroke="#00D4E8" stroke-width="3" stroke-linecap="round"/><text x="21" y="31" font-family="Playfair Display, Georgia, serif" font-size="22" font-weight="700" fill="url(#aFontGrad2)" text-anchor="middle">A</text><circle cx="21" cy="13" r="4.5" fill="#F0B429"/><circle cx="21" cy="13" r="2.8" fill="#050A18"/><circle cx="21" cy="13" r="1.2" fill="#F0B429"/><circle cx="37" cy="11.5" r="2" fill="#F0B429" opacity="0.7"/><circle cx="37" cy="29.5" r="2" fill="#00D4E8" opacity="0.7"/></svg></div>
+        <span class="logo-word" style="font-size:1.1rem;">ATRONUS</span>
+      </a>
+      <p>Enterprise AI infrastructure built compliance-first. Parent company of OmniBotX, Risk Intelligence Engine, and OmniServe Texas LLC.</p>
+      <p style="font-size:0.75rem;color:var(--gray);font-style:italic;">Intelligence · Integrity · Infrastructure</p>
+      <div class="comp-badges">
+        <span class="comp-badge">CCPA</span><span class="comp-badge">GDPR</span><span class="comp-badge">FCRA</span><span class="comp-badge">SOC 2</span><span class="comp-badge">CA SB 942</span><span class="comp-badge">PCI DSS L1</span>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <a href="https://omnibotx.ai" target="_blank">OmniBotX</a>
+      <a href="#products">Risk Intelligence Engine</a>
+      <a href="https://omniservetexas.com" target="_blank">OmniServe Texas</a>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <a href="#" onclick="openModal('privacy')">Privacy Policy</a>
+      <a href="#" onclick="openModal('terms')">Terms of Service</a>
+      <a href="#" onclick="openModal('cookie')">Cookie Policy</a>
+      <a href="#" onclick="openModal('privacy')">Do Not Sell (CCPA)</a>
+      <a href="#compliance">Compliance</a>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <a href="mailto:info@omniservetexas.com">info@omniservetexas.com</a>
+      <a href="https://omnibotx.ai" target="_blank">OmniBotX</a>
+      <a href="https://omniservetexas.com" target="_blank">OmniServe Texas</a>
+      <a href="#" onclick="showCookieBanner()">Cookie Settings</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy" style="display:flex;align-items:center;gap:1.5rem;">© 2026 Atronus Technologies, Inc. · Pearland, TX · All rights reserved.<br/>Atronus Technologies is the parent company of OmniServe Texas LLC. &nbsp;<a href="https://admin.atronus.com" title="Command Center" style="color:rgba(255,255,255,0.1);text-decoration:none;font-family:'JetBrains Mono',monospace;font-size:0.75rem;transition:color 0.3s;" onmouseover="this.style.color='rgba(0,212,232,0.35)'" onmouseout="this.style.color='rgba(255,255,255,0.1)'">⌘</a></div>
+    <div class="footer-legal">
+      <a href="#" onclick="openModal('privacy')">Privacy</a>
+      <a href="#" onclick="openModal('terms')">Terms</a>
+      <a href="#" onclick="openModal('cookie')">Cookies</a>
+    </div>
+  </div>
+</footer>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <div class="cookie-left">
+    <h4>We value your privacy</h4>
+    <p>Atronus Technologies uses cookies to operate our platform, analyze usage, deliver personalized content, and power AI features. We disclose AI interactions per CA SB 942. Manage your preferences below.</p>
+    <div class="cookie-toggles">
+      <label class="cookie-toggle"><div class="toggle-sw on locked"></div>Necessary (Required)</label>
+      <label class="cookie-toggle"><div class="toggle-sw on" id="tog-analytics" onclick="toggleCk(this)"></div>Analytics</label>
+      <label class="cookie-toggle"><div class="toggle-sw" id="tog-marketing" onclick="toggleCk(this)"></div>Marketing</label>
+      <label class="cookie-toggle"><div class="toggle-sw on" id="tog-ai" onclick="toggleCk(this)"></div>AI Processing</label>
+    </div>
+    <span class="ccpa-link" onclick="openModal('privacy')">Do Not Sell or Share My Personal Information (CCPA)</span>
+  </div>
+  <div class="cookie-actions">
+    <button class="ck-btn ck-reject" onclick="rejectCookies()">Reject All</button>
+    <button class="ck-btn ck-save" onclick="savePrefs()">Save Preferences</button>
+    <button class="ck-btn ck-accept" onclick="acceptCookies()">Accept All</button>
+  </div>
+</div>
+
+<!-- PRIVACY MODAL -->
+<div class="modal-overlay" id="modal-privacy">
+  <div class="modal-box">
+    <div class="modal-header"><h2>Privacy Policy</h2><button class="modal-close-btn" onclick="closeModal('privacy')">Close ✕</button></div>
+    <p class="modal-meta">Atronus Technologies, Inc. · Pearland, TX · Effective: January 1, 2026 · Updated: April 2026</p>
+    <h3>1. Who We Are</h3>
+    <p>Atronus Technologies, Inc. is an enterprise AI company based in Pearland, Texas operating OmniBotX (omnibotx.ai), Risk Intelligence Engine (IDVerifyPro), and OmniServe Texas LLC (omniservetexas.com).</p>
+    <h3>2. Information We Collect</h3>
+    <p>We collect information you provide directly (name, email, payment info), automatically collected data (usage, device, IP, cookies), and for identity verification: government-issued IDs, biometric data (with explicit consent), and financial documents.</p>
+    <h3>3. How We Use Your Information</h3>
+    <ul><li>To provide and improve our AI-powered services</li><li>To process payments via Stripe (PCI DSS Level 1)</li><li>To comply with FCRA, CCPA, GDPR, and BIPA obligations</li><li>To detect and prevent fraud</li><li>To send service communications</li></ul>
+    <h3>4. AI Disclosure (CA SB 942)</h3>
+    <p>Atronus Technologies uses artificial intelligence in OmniBotX (AI chatbot) and Risk Intelligence Engine (AI document verification and fraud detection). Users are notified when interacting with AI systems. AI decisions in identity verification are subject to human review.</p>
+    <h3>5. Biometric Data (BIPA)</h3>
+    <p>We obtain explicit written consent before collecting biometric data, disclose the purpose and retention period, never sell biometric data, and destroy it within 3 years or upon service termination.</p>
+    <h3>6. California Privacy Rights (CCPA)</h3>
+    <p>California residents have the right to know, delete, opt-out of sale, and non-discrimination for exercising rights. We do not sell personal information. Contact: info@omniservetexas.com</p>
+    <h3>7. EU/UK Privacy Rights (GDPR)</h3>
+    <p>EU/UK residents have rights of access, rectification, erasure, restriction, portability, and objection. Data transfers outside the EU/UK use Standard Contractual Clauses.</p>
+    <h3>8. FCRA Compliance</h3>
+    <p>Tenant screening services comply with FCRA including required disclosures, proper authorization, and adverse action notices.</p>
+    <h3>9. Contact</h3>
+    <p>Atronus Technologies, Inc. · Pearland, Texas · info@omniservetexas.com</p>
+  </div>
+</div>
+
+<!-- TERMS MODAL -->
+<div class="modal-overlay" id="modal-terms">
+  <div class="modal-box">
+    <div class="modal-header"><h2>Terms of Service</h2><button class="modal-close-btn" onclick="closeModal('terms')">Close ✕</button></div>
+    <p class="modal-meta">Atronus Technologies, Inc. · Effective: January 1, 2026 · Governed by Texas Law</p>
+    <h3>1. Acceptance</h3>
+    <p>By using any Atronus Technologies product, you agree to these Terms. If you do not agree, do not use our services.</p>
+    <h3>2. Services</h3>
+    <p>We provide AI-powered SaaS products (OmniBotX, Risk Intelligence Engine) and professional document services (OmniServe Texas) on subscription and per-service bases.</p>
+    <h3>3. Permitted Use</h3>
+    <p>Services are for lawful purposes only, in compliance with CCPA, GDPR, FCRA, BIPA, and all applicable laws. No reverse engineering, unauthorized resale, or discriminatory use.</p>
+    <h3>4. AI Limitations</h3>
+    <p>Our AI products assist decision-making but do not constitute legal, financial, or professional advice. Final decisions remain the responsibility of the operator.</p>
+    <h3>5. Payment Terms</h3>
+    <p>Subscriptions billed monthly or annually via Stripe. Cancellations take effect at end of billing period. Refunds handled case by case.</p>
+    <h3>6. Limitation of Liability</h3>
+    <p>Liability is limited to amounts paid in the prior 12 months. We are not liable for indirect or consequential damages.</p>
+    <h3>7. Governing Law</h3>
+    <p>These terms are governed by Texas law. Disputes resolved by binding arbitration in Houston, Texas.</p>
+    <h3>8. Contact</h3>
+    <p>info@omniservetexas.com · Atronus Technologies, Inc. · Pearland, Texas</p>
+  </div>
+</div>
+
+<!-- COOKIE POLICY MODAL -->
+<div class="modal-overlay" id="modal-cookie">
+  <div class="modal-box">
+    <div class="modal-header"><h2>Cookie Policy</h2><button class="modal-close-btn" onclick="closeModal('cookie')">Close ✕</button></div>
+    <p class="modal-meta">Atronus Technologies, Inc. · Effective: January 1, 2026</p>
+    <h3>Necessary Cookies</h3>
+    <p>Essential for platform operation. Includes authentication tokens, security cookies, and session management. Cannot be disabled.</p>
+    <h3>Analytics Cookies</h3>
+    <p>Help us understand platform usage through aggregated, anonymized data. Opt-out available at any time via Cookie Settings.</p>
+    <h3>Marketing Cookies</h3>
+    <p>Used to deliver relevant advertising and measure campaign effectiveness. Opt-out available. California residents may exercise CCPA Do Not Sell rights.</p>
+    <h3>AI Processing Cookies</h3>
+    <p>Enable OmniBotX chatbot functionality, language detection, and AI-powered features. Covered by CA SB 942 AI disclosure. Opt-out disables AI chat features.</p>
+    <h3>Managing Preferences</h3>
+    <p>Manage preferences at any time via Cookie Settings in our footer. For CCPA Do Not Sell requests, contact info@omniservetexas.com.</p>
+  </div>
+</div>
+
+<script>
+// FADE IN
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible');});},{threshold:0.08});
+document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
+
+// COOKIE
+function showCookieBanner(){document.getElementById('cookie-banner').classList.add('show');}
+function hideCookieBanner(){document.getElementById('cookie-banner').classList.remove('show');}
+function acceptCookies(){localStorage.setItem('atronus_consent','all');hideCookieBanner();}
+function rejectCookies(){localStorage.setItem('atronus_consent','necessary');hideCookieBanner();}
+function savePrefs(){
+  const p={analytics:document.getElementById('tog-analytics').classList.contains('on'),marketing:document.getElementById('tog-marketing').classList.contains('on'),ai:document.getElementById('tog-ai').classList.contains('on')};
+  localStorage.setItem('atronus_consent',JSON.stringify(p));hideCookieBanner();
+}
+function toggleCk(el){if(!el.classList.contains('locked'))el.classList.toggle('on');}
+window.addEventListener('load',()=>{if(!localStorage.getItem('atronus_consent'))setTimeout(showCookieBanner,1800);});
+
+// MODALS
+function openModal(t){document.getElementById('modal-'+t).classList.add('show');}
+function closeModal(t){document.getElementById('modal-'+t).classList.remove('show');}
+document.querySelectorAll('.modal-overlay').forEach(m=>m.addEventListener('click',e=>{if(e.target===m)m.classList.remove('show');}));
+
+// CHAT FAQ
+const FAQ={
+  omnibotx:["<strong>OmniBotX</strong> is our AI-powered multilingual chatbot available in <span class='gold'>100+ languages</span>.<br/><br/><strong>Pricing:</strong><br/>→ Small Business: $69/month<br/>→ Medium Enterprise: $149/month<br/>→ Large Enterprise: $399/month<br/><br/>All plans include AI-powered responses, CCPA/GDPR/CA SB 942 compliance, and 100+ languages. <a href='https://omnibotx.ai' target='_blank' style='color:var(--gold)'>Start your free trial →</a>","omnibot","chatbot","bot","omni"],
+  pricing:["<strong>OmniBotX Pricing:</strong><br/>→ <span class='gold'>Small Business:</span> $69/month<br/>→ <span class='gold'>Medium Enterprise:</span> $149/month<br/>→ <span class='gold'>Large Enterprise:</span> $399/month<br/><br/><strong>OmniServe Texas services</strong> are priced per service — notary from $25, translation per page, tax filing by complexity.<br/><br/>Contact us for enterprise volume pricing on Risk Intelligence Engine.","pric","cost","plan","fee","how much"],
+  whitelabel:["<strong>White-Label OmniBotX</strong> is available on our Enterprise plan ($399/mo).<br/><br/>Agencies use OmniBotX to:<br/>→ Resell under their own brand<br/>→ Add to client websites with custom branding<br/>→ Charge clients $200–$500/mo per deployment<br/><br/>The Enterprise plan includes white-label configuration, custom domain, priority support, and 100+ language capability. <a href='https://omnibotx.ai' target='_blank' style='color:var(--gold)'>Get started →</a>","white","label","agency","resell","partner"],
+  notary:["<strong>OmniServe Texas</strong> offers professional notary services:<br/><br/>→ <strong>Mobile Notary</strong> — we come to you anywhere in Texas<br/>→ <strong>Remote Online Notary (RON)</strong> — nationwide via video<br/>→ <strong>Loan Signing</strong> — certified loan signing agent<br/>→ <strong>Same-day</strong> appointments available<br/><br/>IRS Authorized · E&O Insured · Available 7 days a week. <a href='https://omniservetexas.com' target='_blank' style='color:var(--gold)'>Book now →</a>","notary","sign","mobile","ron","remote"],
+  poa:["<strong>Power of Attorney (POA)</strong> services — our specialty:<br/><br/>→ <span class='gold'>Ethiopian POA</span> — dual-language EN + Amharic, kebele/woreda fields, AI-generated<br/>→ <span class='gold'>African POA</span> — 25+ African countries, adaptive intake<br/>→ <strong>International POA</strong> — any country, any language<br/>→ AI-powered document drafting<br/>→ Notarized and certified<br/><br/><a href='https://omniservetexas.com' target='_blank' style='color:var(--gold)'>Start your POA →</a>","poa","power of attorney","ethiopia","african","african"],
+  translation:["<strong>Translation Services</strong> in 100+ languages:<br/><br/>→ Legal documents · Contracts · Certificates<br/>→ Immigration documents<br/>→ Medical records<br/>→ Business documents<br/>→ Certified translations accepted by USCIS<br/>→ AI-assisted + human-reviewed<br/><br/>Available nationally. Fast turnaround. <a href='https://omniservetexas.com' target='_blank' style='color:var(--gold)'>Get a quote →</a>","translat","language","interpret","certif"],
+  ifta:["<strong>IFTA & Tax Services</strong> by OmniServe Texas:<br/><br/>→ <strong>IFTA filing</strong> — quarterly fuel tax for truckers/fleet owners<br/>→ <strong>Tax preparation</strong> — individual and business<br/>→ <strong>IRS Authorized</strong> e-file provider<br/>→ <strong>Bookkeeping</strong> — monthly reconciliation<br/>→ Multi-entity experience (LLC, S-Corp, C-Corp)<br/><br/><a href='https://omniservetexas.com' target='_blank' style='color:var(--gold)'>Contact us →</a>","ifta","tax","book","account","trucking","fleet"],
+  rie:["<strong>Risk Intelligence Engine (RIE)</strong> is our enterprise AI platform currently in final development.<br/><br/>Features include:<br/>→ AI-powered document verification (Claude API)<br/>→ Google Cloud Vision OCR<br/>→ Biometric liveness detection<br/>→ Multi-signal fraud risk scoring<br/>→ 5-jurisdiction compliance (USA/CAN/GBR/AUS/ARE)<br/>→ Tenant, PM & platform admin portals<br/>→ Mobile-first design<br/><br/>Targeting real estate first, then healthcare.<br/><br/><strong>Request early access:</strong> info@omniservetexas.com","rie","risk","idverify","identity","verify","tenant","screen","fraud","biometric"],
+  book:["<strong>Booking OmniServe Texas services</strong> is easy:<br/><br/>→ Visit <a href='https://omniservetexas.com' target='_blank' style='color:var(--gold)'>omniservetexas.com</a><br/>→ Click 📅 BOOK APPOINTMENT<br/>→ Select your service<br/>→ Pay 50% deposit via Stripe<br/>→ Receive instant confirmation<br/><br/>Same-day appointments available. Available 7 days a week, 24/7 online booking.","book","appoint","schedul","reserv"],
+  compliance:["<strong>Atronus compliance framework:</strong><br/><br/>→ CCPA — California Consumer Privacy Act<br/>→ GDPR — EU/UK Data Protection<br/>→ FCRA — Fair Credit Reporting Act<br/>→ BIPA — Biometric Privacy (Illinois)<br/>→ PIPEDA — Canadian Privacy Law<br/>→ CA SB 942 — AI Transparency<br/>→ SOC 2 Aligned<br/>→ Stripe PCI DSS Level 1<br/><br/>Compliance is not a feature at Atronus — it is the architectural foundation of every product we build.","complian","gdpr","ccpa","fcra","bipa","legal","privacy","regulation"],
+  about:["<strong>Atronus Technologies, Inc.</strong> is an enterprise AI company based in Pearland, Texas.<br/><br/>Founded by <span class='gold'>Dinksew Aweke</span> — former Accenture Healthcare IT Security consultant with MS Computer Science, MBA, and BS Industrial Chemistry.<br/><br/>Our products:<br/>→ <span class='gold'>OmniBotX</span> — AI multilingual chatbot (live)<br/>→ <strong>Risk Intelligence Engine</strong> — enterprise risk AI (launching soon)<br/>→ <span class='gold'>OmniServe Texas</span> — professional document services (live)<br/><br/>Motto: <em>Intelligence · Integrity · Infrastructure</em>","atronus","about","who","company","founder","dinksew"],
+  contact:["<strong>Contact Atronus Technologies:</strong><br/><br/>📧 info@omniservetexas.com<br/>🌐 omnibotx.ai<br/>🌐 omniservetexas.com<br/><br/>For:<br/>→ OmniBotX trials & agency partnerships<br/>→ RIE early access requests<br/>→ OmniServe Texas bookings<br/>→ Enterprise sales & compliance inquiries<br/><br/>We typically respond within a few hours. Based in Pearland/Houston, TX.","contact","email","reach","talk","partner","sales"],
+  default:"Great question! I can help with <strong>OmniBotX</strong>, <strong>OmniServe Texas services</strong>, <strong>Risk Intelligence Engine</strong>, pricing, white-label partnerships, compliance, or bookings.<br/><br/>Try asking about: <em>pricing, notary services, POA, IFTA, translation, or the Risk Intelligence Engine.</em>"
+};
+
+function getBotReply(msg){
+  const m=msg.toLowerCase();
+  for(const[key,val]of Object.entries(FAQ)){
+    if(key==='default')continue;
+    const arr=Array.isArray(val)?val:[];
+    const resp=arr[0];
+    const keywords=arr.slice(1);
+    if(keywords.some(k=>m.includes(k)))return resp;
+  }
+  return FAQ.default;
+}
+
+function addBubble(html,isUser=false){
+  const body=document.getElementById('chat-body');
+  const div=document.createElement('div');
+  div.className='chat-bubble'+(isUser?' user':'');
+  div.innerHTML=isUser?html:html;
+  body.appendChild(div);
+  body.scrollTop=body.scrollHeight;
+  return div;
+}
+
+function addTyping(){
+  const body=document.getElementById('chat-body');
+  const div=document.createElement('div');
+  div.className='typing';
+  div.innerHTML='<span></span><span></span><span></span>';
+  div.id='typing-ind';
+  body.appendChild(div);
+  body.scrollTop=body.scrollHeight;
+}
+
+function removeTyping(){const t=document.getElementById('typing-ind');if(t)t.remove();}
+
+function sendChat(){
+  const input=document.getElementById('chat-input');
+  const msg=input.value.trim();
+  if(!msg)return;
+  addBubble(msg,true);
+  input.value='';
+  addTyping();
+  setTimeout(()=>{
+    removeTyping();
+    addBubble(getBotReply(msg));
+  },900);
+}
+
+function askFAQ(el){
+  const msg=el.textContent;
+  addBubble(msg,true);
+  addTyping();
+  setTimeout(()=>{
+    removeTyping();
+    addBubble(getBotReply(msg));
+  },900);
+  document.getElementById('chat-body').scrollTop=9999;
+}
+
+document.getElementById('chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendChat();});
+</script>
+
+<script>
+(function(){
+const canvas=document.getElementById('hero-canvas');
+if(!canvas)return;
+const ctx=canvas.getContext('2d');
+let W=canvas.offsetWidth||window.innerWidth;
+let H=canvas.offsetHeight||600;
+canvas.width=W;canvas.height=H;
+
+const T=(a)=>`rgba(0,212,232,${a})`;
+const G=(a)=>`rgba(240,180,41,${a})`;
+
+const LABELS=['Healthcare','Identity','Language','Finance','Security','Commerce','Real Estate','Legal','Education','Transport','Insurance','Government'];
+let nodes=LABELS.map((label,i)=>{
+  const angle=(i/LABELS.length)*Math.PI*2;
+  return {
+    label,px:W/2+Math.cos(angle)*(W*0.32*(0.5+Math.random()*0.5)),
+    py:H/2+Math.sin(angle)*(H*0.36*(0.5+Math.random()*0.5)),
+    vx:(Math.random()-0.5)*0.35,vy:(Math.random()-0.5)*0.35,
+    r:11+Math.random()*7,color:i%3===0?'gold':'teal',
+    pulse:Math.random()*Math.PI*2,pulseSpeed:0.018+Math.random()*0.01
+  };
+});
+
+const particles=[];
+for(let i=0;i<70;i++){
+  particles.push({si:Math.floor(Math.random()*nodes.length),di:Math.floor(Math.random()*nodes.length),t:Math.random(),speed:0.002+Math.random()*0.002,color:Math.random()>0.5?'teal':'gold'});
+}
+const bgDots=[];
+for(let i=0;i<80;i++){
+  bgDots.push({x:Math.random()*W,y:Math.random()*H,vy:-(0.1+Math.random()*0.2),r:Math.random()*1.2+0.3,a:Math.random()*0.3+0.07,c:Math.random()>0.55?'teal':'gold'});
+}
+
+let frame=0;
+function draw(){
+  ctx.clearRect(0,0,W,H);
+  const step=50;
+  ctx.strokeStyle=T(0.04);ctx.lineWidth=0.5;
+  for(let x=0;x<W;x+=step){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,H);ctx.stroke();}
+  for(let y=0;y<H;y+=step){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(W,y);ctx.stroke();}
+  bgDots.forEach(d=>{d.y+=d.vy;if(d.y<0)d.y=H;ctx.beginPath();ctx.arc(d.x,d.y,d.r,0,Math.PI*2);ctx.fillStyle=d.c==='teal'?T(d.a):G(d.a);ctx.fill();});
+  const cx=W/2,cy=H/2;
+  nodes.forEach((a,i)=>{
+    nodes.forEach((b,j)=>{
+      if(j<=i)return;
+      const dx=a.px-b.px,dy=a.py-b.py,dist=Math.sqrt(dx*dx+dy*dy),maxD=W*0.42;
+      if(dist>maxD)return;
+      ctx.beginPath();ctx.moveTo(a.px,a.py);ctx.lineTo(b.px,b.py);
+      ctx.strokeStyle=T((1-dist/maxD)*0.1);ctx.lineWidth=0.5;ctx.stroke();
+    });
+    const dx=a.px-cx,dy=a.py-cy,dist=Math.sqrt(dx*dx+dy*dy);
+    ctx.beginPath();ctx.moveTo(a.px,a.py);ctx.lineTo(cx,cy);
+    ctx.strokeStyle=a.color==='gold'?G((1-dist/(W*0.55))*0.2):T((1-dist/(W*0.55))*0.22);
+    ctx.lineWidth=0.5;ctx.stroke();
+  });
+  particles.forEach(p=>{
+    p.t+=p.speed;if(p.t>1){p.t=0;p.si=Math.floor(Math.random()*nodes.length);p.di=Math.floor(Math.random()*nodes.length);}
+    const src=nodes[p.si],dst=nodes[p.di];if(!src||!dst)return;
+    const x=src.px+(dst.px-src.px)*p.t,y=src.py+(dst.py-src.py)*p.t,a=Math.sin(p.t*Math.PI)*0.85;
+    ctx.beginPath();ctx.arc(x,y,2,0,Math.PI*2);ctx.fillStyle=p.color==='teal'?T(a):G(a);ctx.fill();
+  });
+  nodes.forEach(n=>{
+    n.pulse+=n.pulseSpeed;const pr=n.r+Math.sin(n.pulse)*2;
+    n.px+=n.vx;n.py+=n.vy;
+    if(n.px<50||n.px>W-50)n.vx*=-1;if(n.py<40||n.py>H-40)n.vy*=-1;
+    const isG=n.color==='gold';
+    ctx.beginPath();ctx.arc(n.px,n.py,pr+6,0,Math.PI*2);ctx.fillStyle=isG?G(0.05):T(0.05);ctx.fill();
+    ctx.beginPath();ctx.arc(n.px,n.py,pr,0,Math.PI*2);ctx.fillStyle=isG?G(0.15):T(0.15);ctx.strokeStyle=isG?G(0.6):T(0.6);ctx.lineWidth=1;ctx.fill();ctx.stroke();
+    ctx.beginPath();ctx.arc(n.px,n.py,n.r*0.42,0,Math.PI*2);ctx.fillStyle=isG?G(0.8):T(0.8);ctx.fill();
+  });
+  const t=frame*0.02,r1=H*0.07+Math.sin(t)*4,r2=H*0.05+Math.sin(t+1)*3;
+  ctx.beginPath();ctx.arc(cx,cy,r1,0,Math.PI*2);ctx.fillStyle=T(0.06);ctx.strokeStyle=T(0.2);ctx.lineWidth=1;ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,r2,0,Math.PI*2);ctx.fillStyle=G(0.1);ctx.strokeStyle=G(0.4);ctx.lineWidth=1.5;ctx.fill();ctx.stroke();
+  ctx.beginPath();ctx.arc(cx,cy,10,0,Math.PI*2);ctx.fillStyle='#F0B429';ctx.fill();
+  ctx.beginPath();ctx.arc(cx,cy,5,0,Math.PI*2);ctx.fillStyle='#050A18';ctx.fill();
+  for(let i=0;i<8;i++){const a=i/8*Math.PI*2+t*0.5;const rx=cx+Math.cos(a)*(r1+14),ry=cy+Math.sin(a)*(r1+14);ctx.beginPath();ctx.arc(rx,ry,2,0,Math.PI*2);ctx.fillStyle=i%2===0?G(0.75):T(0.75);ctx.fill();}
+  frame++;requestAnimationFrame(draw);
+}
+draw();
+window.addEventListener('resize',()=>{W=canvas.offsetWidth||window.innerWidth;H=canvas.offsetHeight||600;canvas.width=W;canvas.height=H;});
+})();
+</script>
+
+<script>
+function toggleMobileNav(){
+  const mn=document.getElementById('mobile-nav');
+  const btn=document.getElementById('mob-btn');
+  const open=mn.style.display==='flex';
+  mn.style.display=open?'none':'flex';
+  btn.textContent=open?'☰':'✕';
+}
+function closeMobileNav(){
+  document.getElementById('mobile-nav').style.display='none';
+  document.getElementById('mob-btn').textContent='☰';
+}
+</script>
+
+<!-- OmniBot Widget — Atronus Technologies -->
+<!-- Replace data-id with Atronus production tenant ID when ready -->
+<script src="https://omnibotx.ai/omnibot.js"
+  data-id="6d1f3fee-a576-4bce-b462-3f15a6d9f832"
+  data-position="bottom-right"
+  async></script>
+
+<script>
+function openOmniBot() {
+  var btn = document.getElementById('omnibot-btn');
+  if (btn) {
+    btn.click();
+  } else {
+    // Fallback: scroll to on-page demo if widget not yet loaded
+    var section = document.getElementById('chat-section');
+    if (section) section.scrollIntoView({behavior:'smooth'});
+  }
+}
+</script>
+</body>
+</html>

@@ -1277,19 +1277,12 @@ function submitDemoForm() {
   var subject = encodeURIComponent('Demo Request — ' + product + ' | ' + fname + ' ' + lname);
   var body = encodeURIComponent(
     'Name: ' + fname + ' ' + lname + '\n' +
-    '
     'Email: ' + email + '\n' +
-    '
     'Phone: ' + (phone||'Not provided') + '\n' +
-    '
     'Company: ' + (company||'Not provided') + '\n' +
-    '
     'Product: ' + product + '\n' +
-    '
     'Industry: ' + (industry||'Not specified') + '\n' +
-    '
-    'Message: ' + (message||'None') + '\n' +
-    '
+    'Message: ' + (message||'None') + '\n\n' +
     '--- Submitted via atronus.com ---'
   );
   window.location.href = 'mailto:info@atronus.com?subject=' + subject + '&body=' + body;
@@ -1320,17 +1313,11 @@ function submitExpertForm() {
   var subject = encodeURIComponent('Expert Consultation — ' + topic + ' | ' + fname + ' ' + lname);
   var body = encodeURIComponent(
     'Name: ' + fname + ' ' + lname + '\n' +
-    '
     'Email: ' + email + '\n' +
-    '
     'Phone: ' + (phone||'Not provided') + '\n' +
-    '
     'Topic: ' + topic + '\n' +
-    '
     'Preferred time: ' + time + '\n' +
-    '
-    'Message: ' + (message||'None') + '\n' +
-    '
+    'Message: ' + (message||'None') + '\n\n' +
     '--- Submitted via atronus.com ---'
   );
   window.location.href = 'mailto:info@atronus.com?subject=' + subject + '&body=' + body;

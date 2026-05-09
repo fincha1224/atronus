@@ -1,0 +1,1277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!-- OmniServe Admin v4.0 | Built 2026-05-07 | Case-centric Supabase + n8n ready -->
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Atronus Command Center — OmniServe · OmniBotX · IDVerifyPro</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --navy:#0A1628;--navy2:#1B2D4F;--navy3:#0F1E36;
+  --gold:#C9941A;--gold2:#F0B429;--gold3:rgba(201,148,26,.12);
+  --white:#fff;--ink:#1F2937;--gray:#6B7280;
+  --border:rgba(255,255,255,.07);--muted:rgba(255,255,255,.4);
+  --green:#4ADE80;--red:#F87171;--blue:#60A5FA;--purple:#A78BFA;
+  --sidebar:220px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;font-family:"DM Sans",sans-serif;background:var(--navy3);color:rgba(255,255,255,.85);overflow:hidden}
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=DM+Sans:wght@300;400;500;600;700&family=DM+Mono:wght@400&display=swap');
+
+/* ── LOGIN PAGE ─────────────────────────────────────────────────── */
+#login-page{position:fixed;inset:0;background:var(--navy);display:flex;align-items:center;justify-content:center;z-index:9999}
+#login-page.hidden{display:none}
+.login-box{background:rgba(255,255,255,.04);border:1px solid rgba(201,148,26,.2);border-radius:20px;padding:2.5rem;width:100%;max-width:400px;text-align:center}
+.login-logo{font-family:"Playfair Display",serif;font-size:1.4rem;font-weight:700;color:#fff;margin-bottom:.25rem}
+.login-logo span{color:var(--gold2)}
+.login-sub{font-size:.78rem;color:var(--muted);margin-bottom:2rem}
+.login-inp{width:100%;padding:.8rem 1rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-family:"DM Sans",sans-serif;font-size:.9rem;outline:none;margin-bottom:.75rem;transition:border-color .2s}
+.login-inp:focus{border-color:var(--gold)}
+.login-btn{width:100%;padding:.9rem;background:linear-gradient(135deg,var(--gold),var(--gold2));color:var(--navy);border:none;border-radius:8px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .2s}
+.login-btn:hover{box-shadow:0 8px 24px rgba(201,148,26,.35)}
+.login-btn:disabled{opacity:.5;cursor:not-allowed}
+.login-err{font-size:.78rem;color:var(--red);margin-bottom:.75rem;display:none}
+
+/* ── APP SHELL ──────────────────────────────────────────────────── */
+#app{display:none;height:100vh;flex-direction:column}
+#app.visible{display:flex}
+
+/* Top bar */
+.topbar{height:52px;background:rgba(10,22,40,.98);border-bottom:1px solid var(--border);display:flex;align-items:center;padding:0 1.25rem;gap:1rem;flex-shrink:0;z-index:100}
+.topbar-brand{font-family:"Playfair Display",serif;font-size:.95rem;font-weight:700;color:#fff}
+.topbar-brand span{color:var(--gold2)}
+.topbar-badge{font-size:.62rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(201,148,26,.12);border:1px solid rgba(201,148,26,.25);color:var(--gold2);padding:.2rem .65rem;border-radius:100px}
+.topbar-right{margin-left:auto;display:flex;align-items:center;gap:.75rem}
+.topbar-time{font-size:.72rem;color:var(--muted);font-family:"DM Mono",monospace}
+.topbar-refresh{background:rgba(255,255,255,.06);border:1px solid var(--border);color:rgba(255,255,255,.55);font-size:.72rem;font-weight:600;padding:.3rem .75rem;border-radius:6px;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .18s}
+.topbar-refresh:hover{color:#fff;border-color:rgba(255,255,255,.2)}
+.topbar-signout{background:transparent;border:none;color:rgba(255,255,255,.3);font-size:.72rem;cursor:pointer;font-family:"DM Sans",sans-serif;transition:color .18s}
+.topbar-signout:hover{color:var(--red)}
+.topbar-site{color:var(--gold2);font-size:.75rem;font-weight:600;text-decoration:none;display:flex;align-items:center;gap:.3rem}
+
+/* Body */
+.app-body{display:flex;flex:1;overflow:hidden}
+
+/* Sidebar */
+.sidebar{width:var(--sidebar);background:rgba(10,22,40,.95);border-right:1px solid var(--border);display:flex;flex-direction:column;overflow-y:auto;flex-shrink:0}
+.sidebar-section{padding:.65rem 1rem .3rem;font-size:.58rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.25)}
+.nav-item{display:flex;align-items:center;gap:.6rem;padding:.6rem 1rem;font-size:.8rem;color:rgba(255,255,255,.45);cursor:pointer;transition:all .18s;font-weight:500;border-left:2px solid transparent;white-space:nowrap}
+.nav-item:hover{color:rgba(255,255,255,.8);background:rgba(255,255,255,.04)}
+.nav-item.active{color:var(--gold2);background:rgba(201,148,26,.08);border-left-color:var(--gold)}
+.nav-icon{font-size:.95rem;flex-shrink:0}
+.sidebar-spacer{flex:1}
+.sidebar-footer{padding:.85rem 1rem;border-top:1px solid var(--border);font-size:.68rem;color:rgba(255,255,255,.2);line-height:1.6}
+
+/* Content */
+.content{flex:1;overflow-y:auto;padding:1.5rem}
+
+/* ── COMPONENTS ──────────────────────────────────────────────────── */
+.tab{display:none}
+.tab.active{display:block}
+
+/* Page header */
+.page-hdr{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;flex-wrap:wrap;gap:.75rem}
+.page-title{font-family:"Playfair Display",serif;font-size:1.15rem;font-weight:700;color:#fff}
+.page-sub{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+.page-actions{display:flex;gap:.5rem;flex-wrap:wrap}
+
+/* KPI grid */
+.kpi-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:.85rem;margin-bottom:1.25rem}
+.kpi{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:1.1rem 1.25rem}
+.kpi-val{font-family:"Playfair Display",serif;font-size:1.5rem;font-weight:700;color:#fff}
+.kpi-lbl{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-top:.2rem}
+.kpi-delta{font-size:.72rem;margin-top:.3rem}
+
+/* Cards */
+.card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:1.25rem;margin-bottom:1rem}
+.card-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem}
+
+/* Charts */
+.chart-grid{display:grid;grid-template-columns:2fr 1fr;gap:.85rem;margin-bottom:1.25rem}
+.chart-wrap{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:12px;padding:1.25rem}
+.chart-title{font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:1rem}
+canvas{max-height:220px}
+
+/* Tables */
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:.78rem}
+th{text-align:left;padding:.45rem .75rem;font-size:.62rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border-bottom:1px solid var(--border)}
+td{padding:.5rem .75rem;border-bottom:1px solid rgba(255,255,255,.03);vertical-align:middle}
+tr:hover td{background:rgba(255,255,255,.02)}
+.badge{font-size:.62rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:.2rem .6rem;border-radius:100px;background:rgba(255,255,255,.06);color:rgba(255,255,255,.5);white-space:nowrap}
+.badge.new{background:rgba(96,165,250,.12);color:var(--blue)}
+.badge.active,.badge.completed,.badge.filed{background:rgba(74,222,128,.12);color:var(--green)}
+.badge.pending,.badge.progress,.badge.preparation{background:rgba(240,180,41,.12);color:var(--gold2)}
+.badge.cancelled,.badge.denied{background:rgba(241,113,113,.12);color:var(--red)}
+
+/* Status select */
+.st-sel{background:rgba(255,255,255,.06);border:1px solid var(--border);color:rgba(255,255,255,.6);font-size:.65rem;border-radius:4px;padding:.15rem .35rem;cursor:pointer;font-family:"DM Sans",sans-serif;outline:none}
+
+/* Buttons */
+.btn{padding:.45rem 1rem;border-radius:7px;font-family:"DM Sans",sans-serif;font-weight:600;font-size:.78rem;cursor:pointer;transition:all .18s;border:none;display:inline-flex;align-items:center;gap:.35rem}
+.btn-gold{background:rgba(201,148,26,.15);color:var(--gold2);border:1px solid rgba(201,148,26,.3)!important}
+.btn-ghost{background:rgba(255,255,255,.06);color:rgba(255,255,255,.6);border:1px solid var(--border)!important}
+.btn-danger{background:rgba(241,113,113,.1);color:var(--red);border:1px solid rgba(241,113,113,.2)!important}
+
+/* CRM Search */
+.crm-search-wrap{position:relative;margin-bottom:1.5rem}
+.crm-search{width:100%;padding:.85rem 1.25rem .85rem 3rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;color:#fff;font-family:"DM Sans",sans-serif;font-size:.92rem;outline:none;transition:border-color .2s}
+.crm-search:focus{border-color:var(--gold)}
+.crm-search::placeholder{color:var(--muted)}
+.crm-icon{position:absolute;left:1rem;top:50%;transform:translateY(-50%);font-size:1rem;color:var(--muted);pointer-events:none}
+.crm-results{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:.65rem}
+.crm-card{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:.9rem 1rem;cursor:pointer;transition:all .18s}
+.crm-card:hover{border-color:rgba(201,148,26,.3);background:rgba(201,148,26,.04)}
+.crm-type{font-size:.6rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold2);margin-bottom:.3rem}
+.crm-name{font-size:.88rem;font-weight:700;color:#fff}
+.crm-email{font-size:.73rem;color:var(--muted);margin-top:.1rem}
+.crm-meta{display:flex;gap:.5rem;margin-top:.4rem;flex-wrap:wrap}
+
+/* Revenue chart selectors */
+.period-tabs{display:flex;gap:.35rem;margin-bottom:.85rem}
+.period-tab{padding:.28rem .75rem;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:"DM Sans",sans-serif;transition:all .18s}
+.period-tab.on{background:rgba(201,148,26,.12);border-color:rgba(201,148,26,.3);color:var(--gold2)}
+
+/* Spinner */
+.spin-wrap{display:flex;align-items:center;justify-content:center;padding:3rem;color:var(--muted);font-size:.82rem;gap:.75rem}
+.spinner{width:20px;height:20px;border:2px solid rgba(201,148,26,.2);border-top-color:var(--gold);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Empty state */
+.empty{text-align:center;padding:3.5rem 1rem;color:var(--muted)}
+.empty-icon{font-size:2rem;margin-bottom:.5rem}
+.empty-text{font-size:.82rem}
+
+/* Toast */
+.toast{position:fixed;bottom:1.5rem;right:1.5rem;background:#1E293B;border:1px solid var(--border);border-radius:10px;padding:.75rem 1.1rem;font-size:.78rem;color:#fff;z-index:99999;animation:slideUp .25s ease;box-shadow:0 8px 24px rgba(0,0,0,.4)}
+@keyframes slideUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+
+/* Case-centric admin additions */
+.case-toolbar{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem}.case-search{flex:1;min-width:220px;padding:.72rem .95rem;background:rgba(255,255,255,.06);border:1.5px solid rgba(255,255,255,.1);border-radius:9px;color:#fff;font-family:'DM Sans',sans-serif;outline:none}.case-search:focus{border-color:var(--gold)}.case-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:1rem}.case-row{display:grid;grid-template-columns:1.1fr .8fr .8fr .65fr .75fr .5fr;gap:.5rem;align-items:center;padding:.8rem;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer}.case-row:hover{background:rgba(201,148,26,.04)}.case-row.header{cursor:default;background:transparent;color:var(--muted);font-size:.62rem;font-weight:800;text-transform:uppercase;letter-spacing:.08em}.case-num{font-family:'DM Mono',monospace;color:var(--gold2);font-weight:700;font-size:.78rem}.case-client{color:#fff;font-weight:700;font-size:.82rem}.case-meta{color:var(--muted);font-size:.7rem;margin-top:.13rem}.timeline{display:flex;flex-direction:column;gap:.55rem}.tl-item{display:flex;gap:.7rem;align-items:flex-start}.tl-dot{width:18px;height:18px;border-radius:50%;background:rgba(201,148,26,.16);border:1px solid rgba(201,148,26,.35);color:var(--gold2);display:flex;align-items:center;justify-content:center;font-size:.55rem;flex-shrink:0;margin-top:.1rem}.tl-body{font-size:.75rem;color:rgba(255,255,255,.68);line-height:1.45}.tl-body strong{color:#fff}.case-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:.75rem}.detail-chip{background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:9px;padding:.72rem}.detail-chip span{display:block;font-size:.6rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:.25rem}.detail-chip strong{display:block;color:#fff;font-size:.82rem}.case-actions-row{display:flex;gap:.45rem;flex-wrap:wrap;margin-top:.85rem}
+@media(max-width:1100px){.case-grid{grid-template-columns:1fr}.case-row{grid-template-columns:1fr}.case-row.header{display:none}.case-detail-grid{grid-template-columns:1fr}}
+
+/* Responsive */
+@media(max-width:900px){
+  :root{--sidebar:52px}
+  .nav-item span{display:none}
+  .sidebar-section,.sidebar-footer{display:none}
+  .kpi-grid{grid-template-columns:repeat(2,1fr)}
+  .chart-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .kpi-grid{grid-template-columns:1fr 1fr}
+  .content{padding:1rem}
+}
+</style>
+</head>
+<body>
+
+<!-- LOGIN PAGE -->
+<div id="login-page">
+  <div class="login-box">
+    <div class="login-logo">Atronus <span>Command Center</span></div>
+
+    <!-- Tab switcher — hidden until check_setup runs -->
+    <div id="auth-tabs" style="display:none;background:rgba(255,255,255,.05);border-radius:8px;padding:.25rem;display:flex;gap:.25rem;margin-bottom:1.5rem">
+      <button id="tab-signin" onclick="switchAuthTab('signin')"
+        style="flex:1;padding:.5rem;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;background:var(--gold);color:var(--navy)">
+        Sign In
+      </button>
+      <button id="tab-create" onclick="switchAuthTab('create')"
+        style="flex:1;padding:.5rem;border:none;border-radius:6px;font-family:'DM Sans',sans-serif;font-size:.8rem;font-weight:700;cursor:pointer;transition:all .2s;background:transparent;color:var(--muted)">
+        Create Account
+      </button>
+    </div>
+
+    <!-- SIGN IN form -->
+    <div id="form-signin">
+      <div class="login-sub" id="signin-sub">Sign in with your admin email and password</div>
+      <input type="email" id="login-email" class="login-inp" placeholder="Email address"
+        autocomplete="email" onkeydown="if(event.key==='Enter')document.getElementById('login-password').focus()"/>
+      <input type="password" id="login-password" class="login-inp" placeholder="Password"
+        autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+      <div class="login-err" id="login-err"></div>
+      <button class="login-btn" id="login-btn" onclick="doLogin()">Sign In to Dashboard</button>
+    </div>
+
+    <!-- CREATE ACCOUNT form (first-time setup only) -->
+    <div id="form-create" style="display:none">
+      <div class="login-sub">Create your admin account &mdash; first time setup</div>
+      <input type="text" id="setup-name" class="login-inp" placeholder="Your full name"
+        autocomplete="name" onkeydown="if(event.key==='Enter')document.getElementById('setup-email').focus()"/>
+      <input type="email" id="setup-email" class="login-inp" placeholder="Email address"
+        autocomplete="email" onkeydown="if(event.key==='Enter')document.getElementById('setup-password').focus()"/>
+      <input type="password" id="setup-password" class="login-inp" placeholder="Password (8+ characters)"
+        autocomplete="new-password" onkeydown="if(event.key==='Enter')document.getElementById('setup-password2').focus()"/>
+      <input type="password" id="setup-password2" class="login-inp" placeholder="Confirm password"
+        autocomplete="new-password" onkeydown="if(event.key==='Enter')doSetup()"/>
+      <div class="login-err" id="setup-err"></div>
+      <button class="login-btn" id="setup-btn" onclick="doSetup()">Create Admin Account</button>
+    </div>
+
+    <div style="margin-top:1.25rem;font-size:.72rem;color:rgba(255,255,255,.2);text-align:center">
+      <a href="/" style="color:var(--muted);text-decoration:none">&#8592; Back to OmniServe Texas</a>
+    </div>
+  </div>
+</div>
+
+<!-- APP -->
+<div id="app">
+
+  <!-- Top bar -->
+  <div class="topbar">
+    <div class="topbar-brand">OmniServe <span>Admin</span></div>
+    <span class="topbar-badge">OMNISERVE · OMNIBOTX · IDVERIFYPRO</span>
+    <div class="topbar-right">
+      <span class="topbar-time" id="topbar-time"></span>
+      <a href="/" class="topbar-site">&#127968; Live Site &#8599;</a>
+      <a href="/translation" class="topbar-site" style="color:var(--muted)">&#128196; Translation &#8599;</a>
+      <a href="/staff" class="topbar-site" style="color:var(--muted)">&#128100; Staff Portal &#8599;</a>
+      <button class="topbar-refresh" onclick="refreshTab()">&#8635; Refresh</button>
+      <button class="topbar-signout" onclick="signOut()">Sign Out</button>
+    </div>
+  </div>
+
+  <div class="app-body">
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+      <div class="sidebar-section">Overview</div>
+      <div class="nav-item active" data-tab="overview" onclick="switchTab(this)"><span class="nav-icon">&#128202;</span><span>Overview</span></div>
+      <div class="nav-item" data-tab="cases" onclick="switchTab(this)"><span class="nav-icon">&#128450;</span><span>Unified Cases</span></div>
+      <div class="nav-item" data-tab="crm" onclick="switchTab(this)"><span class="nav-icon">&#128269;</span><span>Client CRM</span></div>
+      <div class="nav-item" data-tab="revenue" onclick="switchTab(this)"><span class="nav-icon">&#128184;</span><span>Revenue</span></div>
+
+      <div class="sidebar-section">Services</div>
+      <div class="nav-item" data-tab="bookings" onclick="switchTab(this)"><span class="nav-icon">&#128203;</span><span>Inquiries</span></div>
+      <div class="nav-item" data-tab="signings" onclick="switchTab(this)"><span class="nav-icon">&#9997;&#65039;</span><span>Notary / Signings</span></div>
+      <div class="nav-item" data-tab="poa" onclick="switchTab(this)"><span class="nav-icon">&#127758;</span><span>POA Pipeline</span></div>
+      <div class="nav-item" data-tab="translations" onclick="switchTab(this)"><span class="nav-icon">&#128196;</span><span>Translations</span></div>
+      <div class="nav-item" data-tab="tax" onclick="switchTab(this)"><span class="nav-icon">&#129526;</span><span>Tax Clients</span></div>
+      <div class="nav-item" data-tab="bookkeeping" onclick="switchTab(this)"><span class="nav-icon">&#128218;</span><span>Bookkeeping</span></div>
+      <div class="nav-item" data-tab="immigration" onclick="switchTab(this)"><span class="nav-icon">&#128738;</span><span>Immigration</span></div>
+
+      <div class="sidebar-section">Operations</div>
+      <div class="nav-item" data-tab="staff" onclick="switchTab(this)"><span class="nav-icon">&#128100;</span><span>Staff</span></div>
+      <div class="nav-item" data-tab="sms" onclick="switchTab(this)"><span class="nav-icon">&#128241;</span><span>SMS Queue</span></div>
+      <div class="nav-item" data-tab="uploads" onclick="switchTab(this)"><span class="nav-icon">&#128193;</span><span>Documents</span></div>
+      <div class="nav-item" data-tab="messages" onclick="switchTab(this)"><span class="nav-icon">&#128172;</span><span>Messages</span></div>
+
+      <div class="sidebar-spacer"></div>
+      <div class="sidebar-footer">
+        OmniServe Texas LLC<br/>
+        Pearland, TX &middot; (713) 609-3516<br/>
+        <span id="sb-version" style="color:rgba(255,255,255,.15)">v4.0 case-centric</span>
+      </div>
+    </nav>
+
+    <!-- Content area -->
+    <main class="content" id="content">
+      <div class="spin-wrap"><div class="spinner"></div> Loading dashboard...</div>
+    </main>
+
+  </div>
+</div>
+
+<script>
+'use strict';
+
+// ── AUTH ──────────────────────────────────────────────────────────
+var _session = JSON.parse(sessionStorage.getItem('omni_admin_session') || 'null');
+var _refreshTimer = null;
+
+// ── SETUP: check on load whether admin exists ─────────────────────────────
+async function checkSetup() {
+  try {
+    var res  = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'check_setup'})});
+    var data = await res.json();
+
+    var tabs = document.getElementById('auth-tabs');
+    if (!data.adminExists) {
+      // No admin yet — show both tabs, default to Create Account
+      if (tabs) tabs.style.display = 'flex';
+      switchAuthTab('create');
+      var sub = document.getElementById('signin-sub');
+      if (sub) sub.textContent = 'Sign in if you already have an account';
+    } else {
+      // Admin exists — Sign In only, hide Create tab
+      if (tabs) {
+        tabs.style.display = 'flex';
+        var createTab = document.getElementById('tab-create');
+        if (createTab) createTab.style.display = 'none';
+      }
+      switchAuthTab('signin');
+    }
+  } catch(e) {
+    // If check fails just show sign in
+    switchAuthTab('signin');
+  }
+}
+
+function switchAuthTab(tab) {
+  var signInForm  = document.getElementById('form-signin');
+  var createForm  = document.getElementById('form-create');
+  var tabSignin   = document.getElementById('tab-signin');
+  var tabCreate   = document.getElementById('tab-create');
+
+  if (tab === 'signin') {
+    if (signInForm) signInForm.style.display = 'block';
+    if (createForm) createForm.style.display = 'none';
+    if (tabSignin)  { tabSignin.style.background = 'var(--gold)'; tabSignin.style.color = 'var(--navy)'; }
+    if (tabCreate)  { tabCreate.style.background = 'transparent'; tabCreate.style.color = 'var(--muted)'; }
+    setTimeout(function(){ var e = document.getElementById('login-email'); if(e) e.focus(); }, 100);
+  } else {
+    if (signInForm) signInForm.style.display = 'none';
+    if (createForm) createForm.style.display = 'block';
+    if (tabCreate)  { tabCreate.style.background = 'var(--gold)'; tabCreate.style.color = 'var(--navy)'; }
+    if (tabSignin)  { tabSignin.style.background = 'transparent'; tabSignin.style.color = 'var(--muted)'; }
+    setTimeout(function(){ var e = document.getElementById('setup-name'); if(e) e.focus(); }, 100);
+  }
+}
+
+async function doSetup() {
+  var name  = (document.getElementById('setup-name')?.value     || '').trim();
+  var email = (document.getElementById('setup-email')?.value    || '').trim();
+  var pw    = (document.getElementById('setup-password')?.value || '').trim();
+  var pw2   = (document.getElementById('setup-password2')?.value|| '').trim();
+  var errEl = document.getElementById('setup-err');
+  var btn   = document.getElementById('setup-btn');
+
+  errEl.style.display = 'none';
+  if (!name)          { errEl.style.display='block'; errEl.textContent='Please enter your name.'; return; }
+  if (!email)         { errEl.style.display='block'; errEl.textContent='Please enter your email.'; return; }
+  if (pw.length < 8)  { errEl.style.display='block'; errEl.textContent='Password must be at least 8 characters.'; return; }
+  if (pw !== pw2)     { errEl.style.display='block'; errEl.textContent='Passwords do not match.'; return; }
+
+  btn.disabled = true; btn.textContent = 'Creating account...';
+  try {
+    var res  = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'setup', name, email, password:pw})});
+    var data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.error || 'Setup failed');
+
+    // Auto sign-in if token returned
+    if (data.autoLogin && data.access_token) {
+      _session = {
+        id:            data.staff.id,
+        name:          data.staff.name,
+        email:         data.staff.email,
+        role:          data.staff.role,
+        access_token:  data.access_token,
+        refresh_token: data.refresh_token,
+        expires_at:    Date.now() + (3600 * 1000),
+      };
+      sessionStorage.setItem('omni_admin_session', JSON.stringify(_session));
+      startTokenRefresh();
+      showApp();
+    } else {
+      // Account created but auto-login failed — switch to sign in
+      switchAuthTab('signin');
+      var emailEl = document.getElementById('login-email');
+      if (emailEl) emailEl.value = email;
+      toast('Account created — please sign in');
+    }
+  } catch(e) {
+    errEl.style.display = 'block';
+    errEl.textContent = e.message || 'Setup failed. Please try again.';
+  } finally {
+    btn.disabled = false; btn.textContent = 'Create Admin Account';
+  }
+}
+
+async function doLogin() {
+  var email    = (document.getElementById('login-email').value    || '').trim();
+  var password = (document.getElementById('login-password').value || '').trim();
+  var errEl    = document.getElementById('login-err');
+  var btn      = document.getElementById('login-btn');
+  if (!email || !password) { errEl.style.display='block'; errEl.textContent='Please enter your email and password.'; return; }
+  btn.disabled = true; btn.textContent = 'Signing in...';
+  errEl.style.display = 'none';
+  try {
+    var res  = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'login', email, password})});
+    var data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.error || 'Login failed');
+    if (data.staff.role !== 'admin') throw new Error('This account does not have admin access.');
+    _session = {
+      id:            data.staff.id,
+      name:          data.staff.name,
+      email:         data.staff.email,
+      role:          data.staff.role,
+      access_token:  data.access_token,
+      refresh_token: data.refresh_token,
+      expires_at:    Date.now() + (3600 * 1000), // 1hr, refresh before expiry
+    };
+    sessionStorage.setItem('omni_admin_session', JSON.stringify(_session));
+    startTokenRefresh();
+    showApp();
+  } catch(e) {
+    errEl.style.display = 'block';
+    errEl.textContent = e.message || 'Incorrect email or password.';
+    var p = document.getElementById('login-password'); if(p){p.value='';p.focus();}
+  } finally {
+    btn.disabled = false; btn.textContent = 'Sign In to Dashboard';
+  }
+}
+
+// Auto-refresh token before it expires
+function startTokenRefresh() {
+  if (_refreshTimer) clearInterval(_refreshTimer);
+  _refreshTimer = setInterval(async function() {
+    if (!_session || !_session.refresh_token) return;
+    try {
+      var res  = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({action:'refresh', refresh_token: _session.refresh_token})});
+      var data = await res.json();
+      if (data.access_token) {
+        _session.access_token  = data.access_token;
+        _session.refresh_token = data.refresh_token;
+        _session.expires_at    = Date.now() + (3600 * 1000);
+        sessionStorage.setItem('omni_admin_session', JSON.stringify(_session));
+      }
+    } catch(e) { console.warn('Token refresh failed:', e.message); }
+  }, 45 * 60 * 1000); // refresh every 45 min
+}
+
+function signOut() {
+  if (_refreshTimer) clearInterval(_refreshTimer);
+  sessionStorage.removeItem('omni_admin_session');
+  _session = null;
+  document.getElementById('app').classList.remove('visible');
+  document.getElementById('login-page').classList.remove('hidden');
+  var e = document.getElementById('login-email'); if(e){e.value='';e.focus();}
+  var p = document.getElementById('login-password'); if(p) p.value = '';
+}
+
+async function showApp() {
+  document.getElementById('login-page').classList.add('hidden');
+  var app = document.getElementById('app');
+  app.classList.add('visible');
+  // Show admin name in topbar
+  if(_session) {
+    var badge = document.querySelector('.topbar-badge');
+    if(badge) badge.textContent = _session.name.toUpperCase() + ' · ADMIN';
+  }
+  startClock();
+  await switchTab(document.querySelector('.nav-item[data-tab="overview"]'));
+}
+
+// Check existing session on load
+window.addEventListener('DOMContentLoaded', async function() {
+  // Check if this is first-time setup or returning admin
+  checkSetup();
+
+  if (_session && _session.access_token) {
+    try {
+      var res  = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({action:'verify', access_token: _session.access_token})});
+      var data = await res.json();
+      if (data.valid && data.staff.role === 'admin') {
+        startTokenRefresh();
+        showApp();
+        return;
+      }
+    } catch(e) {}
+    sessionStorage.removeItem('omni_admin_session');
+    _session = null;
+  }
+  document.getElementById('login-email').focus();
+});
+
+// ── API ───────────────────────────────────────────────────────────
+async function api(action, extra) {
+  if (!_session) throw new Error('Not authenticated');
+  var res  = await fetch('/api/supabase', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({
+      action,
+      access_token: _session.access_token,
+      ...(extra||{})
+    }),
+  });
+  var data = await res.json();
+  if (!res.ok) {
+    if (res.status === 403) { signOut(); throw new Error('Session expired. Please sign in again.'); }
+    throw new Error(data.error || 'API error');
+  }
+  return data;
+}
+
+// ── NAVIGATION ────────────────────────────────────────────────────
+var _currentTab = 'overview';
+
+async function switchTab(el) {
+  if (!el) return;
+  document.querySelectorAll('.nav-item').forEach(function(n){ n.classList.remove('active'); });
+  el.classList.add('active');
+  _currentTab = el.dataset.tab;
+  await loadTab(_currentTab);
+}
+
+function refreshTab() { loadTab(_currentTab); }
+
+function render(html) { document.getElementById('content').innerHTML = html; }
+function loading(label) { render('<div class="spin-wrap"><div class="spinner"></div> ' + (label||'Loading...') + '</div>'); }
+function empty(icon, text) { return '<div class="empty"><div class="empty-icon">'+icon+'</div><div class="empty-text">'+text+'</div></div>'; }
+
+function fmtDate(d)  { return d ? new Date(d).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}) : '—'; }
+function fmtMoney(c) { return c ? '$'+(c/100).toFixed(2) : '—'; }
+function fmtStatus(s){ var cls = (s||'').toLowerCase().replace(/\s+/g,'-'); return '<span class="badge '+cls+'">'+(s||'—')+'</span>'; }
+function stSel(table, id, current, options) {
+  return '<select class="st-sel" onchange="updateField(\''+table+'\',\''+id+'\',\'status\',this.value)">'+
+    options.map(function(o){return '<option value="'+o+'"'+(o===current?' selected':'')+'>'+o+'</option>';}).join('')+'</select>';
+}
+async function updateField(table, id, field, value) {
+  try { await api('admin_update_field', {table, id, field, value}); toast('Status updated'); }
+  catch(e) { toast('Update failed: '+e.message, true); }
+}
+function toast(msg, err) {
+  var t = document.createElement('div');
+  t.className = 'toast';
+  t.style.borderColor = err ? 'rgba(241,113,113,.3)' : 'rgba(74,222,128,.25)';
+  t.textContent = (err?'&#10060; ':'&#10004; ') + msg;
+  document.body.appendChild(t);
+  setTimeout(function(){ t.remove(); }, 3000);
+}
+
+// Clock
+function startClock() {
+  function tick() {
+    var el = document.getElementById('topbar-time');
+    if (el) el.textContent = new Date().toLocaleTimeString('en-US',{hour:'2-digit',minute:'2-digit',hour12:true})+' CST';
+  }
+  tick(); setInterval(tick, 30000);
+}
+
+// ── TAB LOADERS ───────────────────────────────────────────────────
+async function loadTab(tab) {
+  loading();
+  try {
+    switch(tab) {
+      case 'overview':     await tabOverview();     break;
+      case 'cases':        await tabCases();        break;
+      case 'crm':          await tabCRM();           break;
+      case 'revenue':      await tabRevenue();       break;
+      case 'bookings':     await tabBookings();      break;
+      case 'signings':     await tabSignings();      break;
+      case 'poa':          await tabPOA();           break;
+      case 'translations': await tabTranslations();  break;
+      case 'tax':          await tabTax();           break;
+      case 'bookkeeping':  await tabBookkeeping();   break;
+      case 'immigration':  await tabImmigration();   break;
+      case 'staff':        await tabStaff();         break;
+      case 'sms':          await tabSMS();           break;
+      case 'uploads':      await tabUploads();       break;
+      case 'messages':     await tabMessages();      break;
+      default: render('<div class="empty"><div class="empty-text">Tab not found</div></div>');
+    }
+  } catch(e) {
+    render('<div class="empty"><div class="empty-icon">&#128308;</div><div class="empty-text">Error: '+e.message+'</div></div>');
+  }
+}
+
+// ── OVERVIEW ──────────────────────────────────────────────────────
+async function tabOverview() {
+  var kpis = await api('admin_kpis');
+  var dc = (kpis.revenueDelta||0) >= 0 ? '#4ADE80':'#F87171';
+  var dt = kpis.revenueDelta != null ? ((kpis.revenueDelta>=0?'&#8593;':'&#8595;')+' '+Math.abs(kpis.revenueDelta)+'% vs last month') : 'No prior data';
+  render(
+    '<div class="page-hdr"><div><div class="page-title">&#128202; Atronus Command Center</div><div class="page-sub">Parent-company operations for OmniServe Texas, OmniBotX.ai, and IDVerifyPro.ai</div></div>'+
+    '<div class="page-actions"><button class="btn btn-ghost" onclick="refreshTab()">&#8635; Refresh</button></div></div>'+
+
+    // KPI row 1
+    '<div class="kpi-grid">'+
+      kpi(kpis.revenueFormatted||'$0.00','Revenue MTD','<span style="color:'+dc+'">'+dt+'</span>')+
+      kpi(kpis.mrrFormatted||'$0/mo','Bookkeeping MRR','<span style="color:var(--muted)">'+( kpis.activeBookkeeping||0)+' active clients</span>')+
+      kpi(kpis.bookingsMTD||0,'Inquiries MTD','<span style="color:#F59E0B">'+(kpis.pendingOrders||0)+' pending</span>')+
+      kpi(kpis.uploadsMTD||0,'Doc Uploads MTD','<span style="color:var(--muted)">'+(kpis.smsOptOuts||0)+' SMS opt-outs</span>')+
+    '</div>'+
+
+    // KPI row 2 - service counts (clickable)
+    '<div style="display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;margin-bottom:1.25rem">'+
+      svcKpi('&#128196;','Translations MTD', kpis.translationsMTD||0, 'translations')+
+      svcKpi('&#129526;','Tax Clients MTD',  kpis.taxClientsMTD||0,  'tax')+
+      svcKpi('&#128738;','Immigration MTD',  kpis.immigrationMTD||0, 'immigration')+
+      svcKpi('&#128241;','SMS Sent MTD',     kpis.smsSentToday||0,   'sms')+
+    '</div>'+
+
+    // Quick actions
+    '<div class="card"><div class="card-title">Quick Actions</div>'+
+    '<div style="display:flex;gap:.5rem;flex-wrap:wrap">'+
+      qbtn('&#128450; Cases',      'cases')+
+      qbtn('&#128203; Inquiries',  'bookings')+
+      qbtn('&#9997; Signings',     'signings')+
+      qbtn('&#127758; POA',        'poa')+
+      qbtn('&#128196; Translations','translations')+
+      qbtn('&#129526; Tax',        'tax')+
+      qbtn('&#128218; Bookkeeping','bookkeeping')+
+      qbtn('&#128738; Immigration','immigration')+
+      qbtn('&#128100; Staff',      'staff')+
+      '<a href="https://dashboard.stripe.com" target="_blank" class="btn btn-ghost">&#128179; Stripe &#8599;</a>'+
+      '<a href="https://resend.com" target="_blank" class="btn btn-ghost">&#128231; Resend &#8599;</a>'+
+      '<a href="https://idverifypro.app.n8n.cloud" target="_blank" class="btn btn-ghost">&#9881;&#65039; n8n &#8599;</a>'+
+    '</div></div>'+
+
+    // Data sources
+    '<div class="card"><div class="card-title">Connected Data Sources</div>'+
+    '<div style="font-size:.72rem;color:rgba(255,255,255,.3);line-height:2.2;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem">'+
+      ['omni_cases','omni_case_services','omni_case_events','omni_case_tasks','omni_country_rules','omni_required_documents','omni_case_access_tokens','omni_invoices','omni_form_submissions','omni_appointments','omni_poa_requests',
+       'omni_translation_quotes','omni_tax_clients','omni_bookkeeping_clients',
+       'omni_immigration_cases','omni_staff','omni_sms_queue','omni_client_documents','omni_messages'].map(function(t){
+        return '<span><code style="color:var(--gold2)">'+t+'</code></span>';
+      }).join('')+
+    '</div></div>'
+  );
+}
+
+function kpi(val, lbl, delta) {
+  return '<div class="kpi"><div class="kpi-val">'+val+'</div><div class="kpi-lbl">'+lbl+'</div><div class="kpi-delta">'+delta+'</div></div>';
+}
+function svcKpi(icon, lbl, val, tab) {
+  return '<div style="background:rgba(255,255,255,.04);border:1px solid var(--border);border-radius:10px;padding:1rem;cursor:pointer;transition:all .18s" onmouseover="this.style.borderColor=\'rgba(201,148,26,.3)\'" onmouseout="this.style.borderColor=\'rgba(255,255,255,.07)\'" onclick="switchTab(document.querySelector(\'[data-tab='+tab+']\'))">'+
+    '<div style="font-size:1.4rem;font-weight:700;color:var(--gold2)">'+val+'</div>'+
+    '<div style="font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-top:.25rem">'+icon+' '+lbl+'</div>'+
+  '</div>';
+}
+function qbtn(label, tab) {
+  return '<button class="btn btn-ghost" onclick="switchTab(document.querySelector(\'[data-tab='+tab+']\'))">'+label+'</button>';
+}
+
+
+// ── UNIFIED CASE MANAGEMENT ──────────────────────────────────────
+async function tabCases() {
+  render(
+    hdr('&#128450; Unified Case Management', 'One case record connects client, service, documents, payments, messages, tasks and timeline', '<button class="btn btn-gold" onclick="refreshTab()">Refresh Cases</button>')+
+    '<div class="case-toolbar"><input id="case-q" class="case-search" placeholder="Search by case ID, client, service, country, email..." oninput="filterCasesUI(this.value)">'+
+    '<button class="btn btn-ghost" onclick="loadCaseList()">&#8635; Reload</button></div>'+
+    '<div id="case-shell" class="case-grid"><div class="card"><div class="spin-wrap"><div class="spinner"></div> Loading cases...</div></div><div class="card"><div class="card-title">Case Detail</div><div style="color:var(--muted);font-size:.82rem">Select a case to view timeline, documents, payments and tasks.</div></div></div>'
+  );
+  await loadCaseList();
+}
+var _caseRows = [];
+async function loadCaseList(){
+  var shell = document.getElementById('case-shell'); if(!shell) return;
+  try{
+    var data = await api('admin_cases');
+    _caseRows = data.rows || data.cases || data || [];
+    renderCaseList(_caseRows);
+  }catch(e){
+    shell.innerHTML = '<div class="card">'+empty('&#128450;','Unified case API not ready yet. Add action admin_cases to /api/supabase and connect omni_cases.')+'</div><div class="card"><div class="card-title">Required Supabase Action</div><div style="font-size:.78rem;color:var(--muted);line-height:1.7">Expected endpoint: <code>admin_cases</code><br>Tables: <code>omni_cases</code>, <code>omni_case_services</code>, <code>omni_case_events</code>, <code>omni_case_tasks</code>. Existing service tables remain unchanged and connect by <code>case_id</code>.</div></div>';
+  }
+}
+function filterCasesUI(q){
+  q=(q||'').toLowerCase().trim();
+  if(!q) return renderCaseList(_caseRows);
+  renderCaseList(_caseRows.filter(function(r){ return JSON.stringify(r).toLowerCase().includes(q); }));
+}
+function renderCaseList(rows){
+  var shell = document.getElementById('case-shell'); if(!shell) return;
+  var list = rows && rows.length ? rows : [];
+  var left = '<div class="card"><div class="card-title">Open Cases &mdash; '+list.length+'</div>';
+  if(!list.length){ left += empty('&#128450;','No cases found yet. New intake submissions should create omni_cases first.'); }
+  else{
+    left += '<div class="case-row header"><div>Case / Client</div><div>Service</div><div>Country</div><div>Status</div><div>Updated</div><div>Open</div></div>'+
+      list.map(function(r){
+        var cid = r.case_number || r.case_id || r.id || '—';
+        var client = r.client_name || r.name || r.email || 'Unknown client';
+        var service = r.service_type || r.primary_service || r.service_family || r.service || 'General';
+        var country = r.destination_country || r.country_name || r.country || '—';
+        var status = r.case_status || r.status || 'new';
+        var updated = r.updated_at || r.created_at || r.submitted_at;
+        return '<div class="case-row" onclick="showCaseDetail(\''+String(r.id||r.case_id||cid).replace(/'/g,'')+'\')">'+
+          '<div><div class="case-num">'+cid+'</div><div class="case-client">'+client+'</div><div class="case-meta">'+(r.email||r.client_email||'')+'</div></div>'+
+          '<div>'+service+'</div><div>'+country+'</div><div>'+fmtStatus(status)+'</div><div style="font-size:.72rem;color:var(--muted)">'+fmtDate(updated)+'</div><div><button class="btn btn-ghost" onclick="event.stopPropagation();showCaseDetail(\''+String(r.id||r.case_id||cid).replace(/'/g,'')+'\')">View</button></div>'+
+        '</div>';
+      }).join('');
+  }
+  left += '</div>';
+  var right = '<div class="card"><div class="card-title">Case Detail</div><div style="color:var(--muted);font-size:.82rem;line-height:1.7">Select a case. Case detail should include services, documents, payments, staff owner, timeline, and client messages.</div></div>';
+  shell.innerHTML = left + right;
+}
+async function showCaseDetail(id){
+  var shell = document.getElementById('case-shell'); if(!shell) return;
+  var left = shell.children[0] ? shell.children[0].outerHTML : '';
+  var row = _caseRows.find(function(r){ return String(r.id||r.case_id||r.case_number)===String(id); }) || {};
+  var detail = row;
+  var events = [];
+  try{
+    var data = await api('admin_case_detail', {case_id:id});
+    detail = data.case || data.detail || row;
+    events = data.events || data.timeline || [];
+  }catch(e){
+    events = [{event_type:'local_preview', title:'API detail not connected', description:'Showing available row fields. Add admin_case_detail action when Supabase migration is deployed.', created_at:new Date().toISOString()}];
+  }
+  var cid = detail.case_number || detail.case_id || detail.id || id;
+  var right = '<div class="card"><div class="card-title">Case '+cid+'</div>'+
+    '<div class="case-detail-grid">'+
+      detailChip('Client', detail.client_name || detail.name || detail.email || '—')+
+      detailChip('Service', detail.service_type || detail.primary_service || detail.service_family || detail.service || '—')+
+      detailChip('Status', detail.case_status || detail.status || 'new')+
+      detailChip('Destination', detail.destination_country || detail.country_name || detail.country || '—')+
+      detailChip('Assigned To', detail.assigned_to_name || detail.owner_name || 'Unassigned')+
+      detailChip('Deadline', fmtDate(detail.due_date || detail.deadline || detail.application_deadline))+
+    '</div>'+
+    '<div class="case-actions-row">'+
+      '<button class="btn btn-gold" onclick="updateCaseStatus(\''+id+'\',\'under_review\')">Mark Under Review</button>'+
+      '<button class="btn btn-ghost" onclick="updateCaseStatus(\''+id+'\',\'pending_documents\')">Pending Docs</button>'+
+      '<button class="btn btn-ghost" onclick="updateCaseStatus(\''+id+'\',\'completed\')">Complete</button>'+ 
+    '</div>'+
+    '<div class="card-title" style="margin-top:1.1rem">Timeline</div><div class="timeline">'+
+      (events.length?events:[{title:'Intake received',description:'Case created or imported into admin view.',created_at:detail.created_at}]).map(function(ev){return '<div class="tl-item"><div class="tl-dot">✓</div><div class="tl-body"><strong>'+(ev.title||ev.event_type||'Event')+'</strong><br>'+(ev.description||ev.notes||'')+'<div style="font-size:.65rem;color:var(--muted);margin-top:.15rem">'+fmtDate(ev.created_at||ev.event_time)+'</div></div></div>';}).join('')+
+    '</div></div>';
+  shell.innerHTML = left + right;
+}
+function detailChip(label,value){ return '<div class="detail-chip"><span>'+label+'</span><strong>'+value+'</strong></div>'; }
+async function updateCaseStatus(id,status){
+  try{ await api('admin_update_field',{table:'omni_cases', id:id, field:'case_status', value:status}); toast('Case status updated'); await loadCaseList(); }
+  catch(e){ toast('Update failed: '+e.message, true); }
+}
+
+// ── CRM SEARCH ────────────────────────────────────────────────────
+var _crmTimeout;
+async function tabCRM() {
+  render(
+    '<div class="page-hdr"><div><div class="page-title">&#128269; Client CRM</div><div class="page-sub">Search across all services by name, email, or phone</div></div></div>'+
+    '<div class="crm-search-wrap"><span class="crm-icon">&#128269;</span><input id="crm-q" class="crm-search" type="text" placeholder="Search by name, email, or phone number..." oninput="crmSearch(this.value)" autocomplete="off"/></div>'+
+    '<div id="crm-results" style="color:var(--muted);font-size:.82rem;padding:.5rem 0">Type at least 2 characters to search across all services...</div>'
+  );
+  setTimeout(function(){ var el = document.getElementById('crm-q'); if(el) el.focus(); }, 100);
+}
+
+async function crmSearch(q) {
+  clearTimeout(_crmTimeout);
+  var res = document.getElementById('crm-results');
+  if (!res) return;
+  if (q.length < 2) { res.innerHTML = '<div style="color:var(--muted);font-size:.82rem;padding:.5rem 0">Type at least 2 characters...</div>'; return; }
+  _crmTimeout = setTimeout(async function() {
+    res.innerHTML = '<div class="spin-wrap" style="padding:1.5rem"><div class="spinner"></div> Searching...</div>';
+    try {
+      var data = await api('admin_crm_search', {query: q});
+      var all = [].concat(data.inquiries||[], data.tax||[], data.translations||[], data.poa||[], data.immigration||[], data.bookkeeping||[]);
+      if (!all.length) { res.innerHTML = '<div class="empty"><div class="empty-icon">&#128269;</div><div class="empty-text">No results for "'+q+'"</div></div>'; return; }
+      res.innerHTML = '<div style="font-size:.72rem;color:var(--muted);margin-bottom:.75rem">'+all.length+' result'+(all.length!==1?'s':'')+' found</div>'+
+        '<div class="crm-results">'+
+        all.map(function(r) {
+          var name = r.client_name || ((r.first_name||'')+(r.last_name?' '+r.last_name:'')) || r.grantor_name || '—';
+          var date = r.submitted_at || r.created_at;
+          return '<div class="crm-card">'+
+            '<div class="crm-type">'+r._type+'</div>'+
+            '<div class="crm-name">'+name+'</div>'+
+            '<div class="crm-email">'+(r.email||'—')+'</div>'+
+            '<div class="crm-meta">'+
+              (r.phone?'<span class="badge">&#128222; '+r.phone+'</span>':'')+
+              (r.status?fmtStatus(r.status):'')+
+              (date?'<span style="font-size:.68rem;color:var(--muted)">'+fmtDate(date)+'</span>':'')+
+            '</div>'+
+          '</div>';
+        }).join('')+
+        '</div>';
+    } catch(e) {
+      res.innerHTML = '<div class="empty"><div class="empty-text">Search failed: '+e.message+'</div></div>';
+    }
+  }, 350);
+}
+
+// ── REVENUE ───────────────────────────────────────────────────────
+var _revenueChart, _mixChart;
+async function tabRevenue() {
+  render(
+    '<div class="page-hdr"><div><div class="page-title">&#128184; Revenue &amp; Analytics</div><div class="page-sub">Stripe-verified payments &middot; All time</div></div></div>'+
+    '<div class="period-tabs">'+
+      ['3','6','12'].map(function(m){ return '<button class="period-tab'+(m==='6'?' on':'')+'" onclick="loadRevChart('+m+',this)">'+m+'M</button>'; }).join('')+
+    '</div>'+
+    '<div class="chart-grid">'+
+      '<div class="chart-wrap"><div class="chart-title">&#128200; Monthly Revenue</div><canvas id="rev-chart"></canvas></div>'+
+      '<div class="chart-wrap"><div class="chart-title">&#127850; Service Mix</div><canvas id="mix-chart"></canvas></div>'+
+    '</div>'+
+    '<div id="rev-table"><div class="spin-wrap"><div class="spinner"></div> Loading invoices...</div></div>'
+  );
+  await loadRevChart(6, document.querySelector('.period-tab.on'));
+}
+
+async function loadRevChart(months, btn) {
+  document.querySelectorAll('.period-tab').forEach(function(b){b.classList.remove('on');});
+  if(btn) btn.classList.add('on');
+
+  try {
+    var data    = await api('admin_revenue_chart', {months});
+    var rows    = data.rows || [];
+    var invoices = await api('admin_invoices');
+
+    // Group by month
+    var byMonth = {};
+    rows.forEach(function(r) {
+      var m = new Date(r.paid_at).toLocaleDateString('en-US',{month:'short',year:'2-digit'});
+      byMonth[m] = (byMonth[m]||0) + (r.amount_cents||0);
+    });
+    var labels = Object.keys(byMonth);
+    var values = labels.map(function(m){return byMonth[m]/100;});
+
+    // Service mix
+    var bySvc = {};
+    rows.forEach(function(r){ var s=r.service||'Other'; bySvc[s]=(bySvc[s]||0)+(r.amount_cents||0); });
+
+    // Destroy old charts
+    if(_revenueChart) _revenueChart.destroy();
+    if(_mixChart)     _mixChart.destroy();
+
+    var revCtx = document.getElementById('rev-chart');
+    var mixCtx = document.getElementById('mix-chart');
+    if(!revCtx || !mixCtx) return;
+
+    _revenueChart = new Chart(revCtx, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [{label:'Revenue ($)', data:values, backgroundColor:'rgba(201,148,26,.6)', borderColor:'#C9941A', borderWidth:1, borderRadius:4}]
+      },
+      options: {responsive:true, maintainAspectRatio:true, plugins:{legend:{display:false}},
+        scales:{x:{ticks:{color:'rgba(255,255,255,.4)',font:{size:10}}},y:{ticks:{color:'rgba(255,255,255,.4)',font:{size:10}},grid:{color:'rgba(255,255,255,.05)'}}}}
+    });
+
+    var mixKeys = Object.keys(bySvc);
+    var colors  = ['#C9941A','#60A5FA','#4ADE80','#A78BFA','#F87171','#FB923C','#34D399'];
+    _mixChart = new Chart(mixCtx, {
+      type: 'doughnut',
+      data: {
+        labels: mixKeys.length ? mixKeys : ['No data'],
+        datasets: [{data: mixKeys.length ? mixKeys.map(function(k){return bySvc[k]/100;}) : [1], backgroundColor:colors, borderWidth:0}]
+      },
+      options: {responsive:true, maintainAspectRatio:true, plugins:{legend:{position:'bottom',labels:{color:'rgba(255,255,255,.5)',font:{size:10},padding:8}}}}
+    });
+
+    // Invoice table
+    var inv = invoices.invoices || invoices || [];
+    var total = inv.reduce(function(s,r){return s+(r.amount_cents||0);},0);
+    document.getElementById('rev-table').innerHTML =
+      '<div class="card" style="margin-top:1rem"><div class="card-title">Recent Invoices &mdash; Total: <span style="color:var(--gold2)">$'+(total/100).toFixed(2)+'</span></div>'+
+      (inv.length ? '<div class="tbl-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Service</th><th>Amount</th><th>Status</th></tr></thead><tbody>'+
+        inv.slice(0,30).map(function(r){return '<tr><td>'+fmtDate(r.paid_at||r.created_at)+'</td><td>'+(r.client_email||'—')+'</td><td>'+(r.service||'—')+'</td><td style="font-weight:700;color:var(--gold2)">'+fmtMoney(r.amount_cents)+'</td><td>'+fmtStatus(r.status)+'</td></tr>';}).join('') +
+        '</tbody></table></div>'
+      : empty('&#128184;','No invoices yet')) + '</div>';
+  } catch(e) {
+    var el = document.getElementById('rev-table');
+    if(el) el.innerHTML = '<div class="empty"><div class="empty-text">Error: '+e.message+'</div></div>';
+  }
+}
+
+// ── BOOKINGS ─────────────────────────────────────────────────────
+async function tabBookings() {
+  var rows = await api('admin_bookings');
+  var list = Array.isArray(rows) ? rows : (rows.rows||[]);
+  render(
+    hdr('&#128203; Inquiries', list.length+' submissions', '<button class="btn btn-ghost" onclick="refreshTab()">&#8635; Refresh</button>')+
+    (list.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Date</th><th>Name</th><th>Service</th><th>Phone</th><th>Email</th><th>SMS</th><th>Status</th></tr></thead><tbody>'+
+      list.map(function(r){ return '<tr>'+
+        '<td>'+fmtDate(r.submitted_at)+'</td>'+
+        '<td style="font-weight:600;color:#fff">'+(r.first_name||'')+' '+(r.last_name||'')+'</td>'+
+        '<td>'+(r.service||'—').replace(/-/g,' ')+'</td>'+
+        '<td><a href="tel:'+r.phone+'" style="color:var(--gold2)">'+(r.phone||'—')+'</a></td>'+
+        '<td><a href="mailto:'+r.email+'" style="color:var(--blue)">'+(r.email||'—')+'</a></td>'+
+        '<td style="color:'+(r.sms_opt_in?'var(--green)':'rgba(255,255,255,.25)')+'">'+(r.sms_opt_in?'&#10003;':'—')+'</td>'+
+        '<td>'+stSel('omni_form_submissions',r.id,r.status,['new','contacted','booked','completed','cancelled'])+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#128203;','No inquiries yet'))
+  );
+}
+
+// ── NOTARY / SIGNINGS ─────────────────────────────────────────────
+async function tabSignings() {
+  var data = await api('admin_signings');
+  var rows = data.rows || [];
+  render(
+    hdr('&#9997;&#65039; Notary &amp; Loan Signings', rows.length+' total', '')+
+    (rows.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Date</th><th>Borrower</th><th>Loan Type</th><th>Platform</th><th>Location</th><th>Fee</th><th>Paid</th><th>Docs</th><th>Status</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr>'+
+        '<td>'+fmtDate(r.signing_date||r.created_at)+'</td>'+
+        '<td style="font-weight:600;color:#fff">'+(r.borrower_name||r.email||'—')+'</td>'+
+        '<td>'+(r.loan_type||'—')+'</td>'+
+        '<td><span class="badge">'+(r.signing_platform||r.location_type||'—')+'</span></td>'+
+        '<td style="font-size:.72rem;color:var(--muted)">'+(r.signing_address||(r.location_type==='RON'?'Remote Online':'—'))+'</td>'+
+        '<td style="color:var(--gold2);font-weight:700">'+fmtMoney(r.fee_cents)+'</td>'+
+        '<td style="color:'+(r.fee_paid?'var(--green)':'var(--red)')+'">'+(r.fee_paid?'&#10003; Paid':'&#10007; Unpaid')+'</td>'+
+        '<td style="color:'+(r.documents_received?'var(--green)':'var(--muted)')+'">'+(r.documents_received?'&#10003;':'&#9679;')+'</td>'+
+        '<td>'+stSel('omni_appointments',r.id,r.status,['New','Confirmed','Completed','Cancelled','No Show'])+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#9997;','No signing orders yet. They will appear here once clients book via the contact form.'))
+  );
+}
+
+// ── POA ───────────────────────────────────────────────────────────
+async function tabPOA() {
+  var data = await api('admin_poa_requests');
+  var rows = data.rows || data || [];
+  render(
+    hdr('&#127758; POA Pipeline', rows.length+' requests', '')+
+    (rows.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Country</th><th>POA Type</th><th>Fee</th><th>Notarized</th><th>Apostille</th><th>Status</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr>'+
+        '<td>'+fmtDate(r.submitted_at)+'</td>'+
+        '<td style="font-weight:600;color:#fff">'+(r.grantor_name||r.client_name||'—')+'</td>'+
+        '<td>'+(r.country_name||r.destination_country||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.poa_type||'—')+'</td>'+
+        '<td style="color:var(--gold2);font-weight:700">'+fmtMoney(r.fee_cents||r.quoted_price_cents)+'</td>'+
+        '<td style="color:'+(r.notarized_at?'var(--green)':'var(--muted)')+'">'+(r.notarized_at?'&#10003;':'—')+'</td>'+
+        '<td style="color:'+(r.apostille_filed?'var(--green)':'var(--muted)')+'">'+(r.apostille_filed?'&#10003;':'—')+'</td>'+
+        '<td>'+stSel('omni_poa_requests',r.id,r.status,['New','In Progress','Notarized','Apostille Pending','Completed','Cancelled'])+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#127758;','No POA requests yet'))
+  );
+}
+
+// ── TRANSLATIONS ─────────────────────────────────────────────────
+async function tabTranslations() {
+  var data = await api('admin_translations');
+  var rows = data.rows || [];
+  var total = rows.reduce(function(s,r){return s+(r.quote_amount_cents||0);},0);
+  render(
+    hdr('&#128196; Translation Orders', rows.length+' orders &middot; Pipeline: <span style="color:var(--gold2)">'+fmtMoney(total)+'</span>', '')+
+    (rows.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Date</th><th>Client</th><th>Languages</th><th>Doc Type</th><th>Words</th><th>Quote</th><th>Rush</th><th>Notary</th><th>Status</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr>'+
+        '<td>'+fmtDate(r.submitted_at)+'</td>'+
+        '<td style="font-weight:600;color:#fff">'+(r.client_name||r.email||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.from_language||'?')+' &#8594; '+(r.to_language||'?')+'</td>'+
+        '<td>'+(r.document_type||'General')+'</td>'+
+        '<td style="color:var(--muted)">'+(r.word_count||'—')+'</td>'+
+        '<td style="color:var(--gold2);font-weight:700">'+fmtMoney(r.quote_amount_cents)+'</td>'+
+        '<td style="color:'+(r.rush_order?'var(--gold2)':'var(--muted)')+'">'+(r.rush_order?'&#9889; Yes':'No')+'</td>'+
+        '<td style="color:'+(r.notarization_needed?'var(--blue)':'var(--muted)')+'">'+(r.notarization_needed?'Yes':'—')+'</td>'+
+        '<td>'+stSel('omni_translation_quotes',r.id,r.status,['New','Quote Sent','Approved','In Progress','Completed','Cancelled'])+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#128196;','No translation orders yet'))
+  );
+}
+
+// ── TAX ──────────────────────────────────────────────────────────
+async function tabTax() {
+  var data = await api('admin_tax');
+  var rows = data.rows || [];
+  render(
+    hdr('&#129526; Tax Clients', rows.length+' clients', '')+
+    (rows.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Client</th><th>Service</th><th>Tax Year</th><th>Docs</th><th>Fee</th><th>Paid</th><th>Deadline</th><th>Status</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr>'+
+        '<td><div style="font-weight:600;color:#fff">'+(r.client_name||'—')+'</div><div style="font-size:.7rem;color:var(--muted)">'+(r.email||'')+'</div></td>'+
+        '<td style="font-size:.75rem">'+(r.service_type||'—')+'</td>'+
+        '<td style="color:var(--gold2);font-weight:700">'+(r.tax_year||'—')+'</td>'+
+        '<td style="color:'+(r.documents_received?'var(--green)':'var(--red)')+'">'+(r.documents_received?'&#10003; Received':'&#9679; Pending')+'</td>'+
+        '<td style="color:var(--gold2);font-weight:700">'+fmtMoney(r.preparer_fee_cents)+'</td>'+
+        '<td style="color:'+(r.fee_paid?'var(--green)':'var(--red)')+'">'+(r.fee_paid?'&#10003;':'&#10007;')+'</td>'+
+        '<td style="font-size:.72rem;color:'+(deadlineSoon(r.filing_deadline)?'var(--red)':'var(--muted)')+'">'+fmtDate(r.filing_deadline)+(deadlineSoon(r.filing_deadline)?' &#128680;':'')+'</td>'+
+        '<td>'+stSel('omni_tax_clients',r.id,r.status,['New Client','Documents Pending','In Progress','Draft Review','Filed','On Extension','Cancelled'])+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#129526;','No tax clients yet'))
+  );
+}
+function deadlineSoon(d) { return d && (new Date(d)-new Date()) < 7*24*60*60*1000; }
+
+// ── BOOKKEEPING ──────────────────────────────────────────────────
+async function tabBookkeeping() {
+  var data = await api('admin_bookkeeping');
+  var rows = data.rows || [];
+  var mrr  = rows.filter(function(r){return r.status==='Active';}).reduce(function(s,r){return s+(r.monthly_fee_cents||0);},0);
+  render(
+    hdr('&#128218; Bookkeeping Clients', rows.filter(function(r){return r.status==='Active';}).length+' active &middot; MRR: <span style="color:var(--gold2)">'+fmtMoney(mrr)+'/mo</span>', '')+
+    (rows.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Client</th><th>Business</th><th>Plan</th><th>Fee/mo</th><th>Software</th><th>Last Month</th><th>Contract</th><th>Status</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr>'+
+        '<td><div style="font-weight:600;color:#fff">'+(r.client_name||'—')+'</div><div style="font-size:.7rem;color:var(--muted)">'+(r.email||'')+'</div></td>'+
+        '<td>'+(r.business_name||'—')+'</td>'+
+        '<td style="font-size:.72rem">'+(r.service_plan||'—')+'</td>'+
+        '<td style="color:var(--gold2);font-weight:700">'+fmtMoney(r.monthly_fee_cents)+'/mo</td>'+
+        '<td><span class="badge">'+(r.software||'—')+'</span></td>'+
+        '<td style="font-size:.72rem;color:var(--muted)">'+(r.last_month_completed||'—')+'</td>'+
+        '<td style="color:'+(r.contract_signed?'var(--green)':'var(--red)')+'">'+(r.contract_signed?'&#10003; Signed':'&#10007;')+'</td>'+
+        '<td>'+stSel('omni_bookkeeping_clients',r.id,r.status,['Prospect','Active','On Hold','Cancelled'])+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#128218;','No bookkeeping clients yet'))
+  );
+}
+
+// ── IMMIGRATION ──────────────────────────────────────────────────
+async function tabImmigration() {
+  var data = await api('admin_immigration');
+  var rows = data.rows || [];
+  render(
+    hdr('&#128738; Immigration Cases', rows.length+' cases', '')+
+    (rows.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Client</th><th>Origin</th><th>Case Type</th><th>Form</th><th>Docs</th><th>Fee</th><th>Deadline</th><th>Status</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr>'+
+        '<td><div style="font-weight:600;color:#fff">'+(r.client_name||'—')+'</div><div style="font-size:.7rem;color:var(--muted)">'+(r.email||'')+'</div></td>'+
+        '<td>'+(r.country_of_origin||'—')+'</td>'+
+        '<td style="font-size:.75rem">'+(r.case_type||'—')+'</td>'+
+        '<td><span class="badge" style="background:rgba(96,165,250,.12);color:var(--blue)">'+(r.form_number||'—')+'</span></td>'+
+        '<td style="color:'+(r.documents_received?'var(--green)':'var(--red)')+'">'+(r.documents_received?'&#10003;':'&#9679; Pending')+'</td>'+
+        '<td style="color:var(--gold2);font-weight:700">'+fmtMoney(r.fee_cents)+'</td>'+
+        '<td style="font-size:.72rem;color:'+(deadlineSoon(r.application_deadline)?'var(--red)':'var(--muted)')+'">'+fmtDate(r.application_deadline)+(deadlineSoon(r.application_deadline)?' &#128680;':'')+'</td>'+
+        '<td>'+stSel('omni_immigration_cases',r.id,r.status,['New Inquiry','Documents Pending','In Preparation','Ready for Review','Submitted to USCIS','Pending USCIS','RFE Received','Approved','Denied','On Hold','Cancelled'])+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#128738;','No immigration cases yet'))
+  );
+}
+
+// ── STAFF ────────────────────────────────────────────────────────
+async function tabStaff() {
+  render(
+    hdr('&#128100; Staff Management', 'Manage access, roles and audit log', '<button class="btn btn-gold" onclick="openAddStaff()">+ Add Staff</button>')+
+    '<div id="staff-list"><div class="spin-wrap"><div class="spinner"></div> Loading staff...</div></div>'+
+    '<div id="staff-audit" style="display:none;margin-top:1rem"></div>'
+  );
+  await loadStaffList();
+}
+
+async function loadStaffList() {
+  if (!_session || !_session.access_token) { signOut(); return; }
+
+  var el = document.getElementById('staff-list');
+  if (!el) return;
+  try {
+    var res  = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'list', access_token: _session && _session.access_token})});
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    var staff = data.staff || [];
+    var roleColors = {admin:'rgba(240,180,41,.15)',translator:'rgba(74,222,128,.1)',notary:'rgba(96,165,250,.1)',tax_preparer:'rgba(167,139,250,.1)',immigration:'rgba(249,115,22,.1)'};
+    el.innerHTML = '<div class="card">'+
+      '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">'+
+        '<div class="card-title" style="margin:0">'+staff.length+' staff account'+(staff.length!==1?'s':'')+'</div>'+
+        '<button class="btn btn-ghost" onclick="loadAuditLog()">&#128196; Audit Log</button>'+
+      '</div>'+
+      '<div style="display:grid;gap:.65rem">'+
+      staff.map(function(s){ return (
+        '<div style="display:flex;align-items:center;gap:1rem;background:rgba(255,255,255,.03);border:1px solid var(--border);border-radius:10px;padding:.85rem 1rem;flex-wrap:wrap">'+
+          '<div style="width:38px;height:38px;border-radius:50%;background:rgba(201,148,26,.15);border:1px solid rgba(201,148,26,.25);display:flex;align-items:center;justify-content:center;font-family:\'Playfair Display\',serif;font-weight:700;color:var(--gold2);flex-shrink:0">'+(s.name||'?').charAt(0).toUpperCase()+'</div>'+
+          '<div style="flex:1;min-width:150px">'+
+            '<div style="font-weight:700;color:#fff">'+s.name+'</div>'+
+            '<div style="font-size:.73rem;color:var(--muted)">'+s.email+'</div>'+
+            '<div style="font-size:.68rem;color:rgba(255,255,255,.3);margin-top:.2rem">'+(s.last_login?'Last login: '+fmtDate(s.last_login):'Never logged in')+' &middot; '+(s.login_count||0)+' sessions</div>'+
+            '<div style="font-size:.65rem;color:rgba(201,148,26,.4);margin-top:.1rem">&#127968; omniservetexas.com/staff</div>'+
+          '</div>'+
+          '<div style="display:flex;align-items:center;gap:.4rem;flex-wrap:wrap">'+
+            '<span class="badge" style="background:'+(roleColors[s.role]||'rgba(255,255,255,.08)')+'">'+s.role+'</span>'+
+            '<span class="badge" style="background:'+(s.active?'rgba(74,222,128,.1)':'rgba(220,38,38,.1)')+';color:'+(s.active?'var(--green)':'var(--red)')+'">'+( s.active?'Active':'Inactive')+'</span>'+
+            (s.active
+              ? '<button class="btn btn-danger" onclick="staffToggle(\'deactivate\',\''+s.id+'\',\''+s.name+'\')">Deactivate</button>'
+              : '<button class="btn btn-gold" onclick="staffToggle(\'activate\',\''+s.id+'\',\''+s.name+'\')">Reactivate</button>')+
+            '<button class="btn btn-ghost" onclick="resetPassword(\''+s.id+'\',\''+s.name+'\')">Reset PIN</button>'+
+          '</div>'+
+        '</div>'
+      );}).join('')+
+      '</div></div>';
+  } catch(e) {
+    el.innerHTML = '<div class="empty"><div class="empty-text">Error: '+e.message+'</div></div>';
+  }
+}
+
+async function staffToggle(action, id, name) {
+  if (!confirm((action==='deactivate'?'Deactivate ':'Reactivate ')+name+'?')) return;
+  
+  try {
+    var res = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action, staff_id:id, access_token: _session && _session.access_token})});
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    toast(name+' '+action+'d');
+    await loadStaffList();
+  } catch(e) { toast(e.message, true); }
+}
+
+async function resetPassword(id, name) {
+  var pin = prompt('New PIN for '+name+' (4-6 digits):');
+  if (!pin || pin.length < 4) return;
+  
+  try {
+    var res = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'update', staff_id:id, password:pin, access_token: _session && _session.access_token})});
+    var data = await res.json();
+    if (!res.ok) throw new Error(data.error);
+    toast('PIN reset for '+name);
+  } catch(e) { toast(e.message, true); }
+}
+
+async function loadAuditLog() {
+  var el = document.getElementById('staff-audit');
+  if (!el) return;
+  
+  el.style.display = 'block';
+  el.innerHTML = '<div class="spin-wrap"><div class="spinner"></div> Loading audit log...</div>';
+  try {
+    var res  = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'audit', limit:50, access_token: _session && _session.access_token})});
+    var data = await res.json();
+    var logs = data.logs || [];
+    el.innerHTML = '<div class="card"><div class="card-title">Audit Log &mdash; Last 50 Actions</div>'+
+      '<div class="tbl-wrap"><table><thead><tr><th>Time</th><th>Staff</th><th>Action</th><th>Details</th></tr></thead><tbody>'+
+      logs.map(function(l){ return '<tr>'+
+        '<td style="font-size:.7rem;color:var(--muted);white-space:nowrap">'+fmtDate(l.created_at)+'</td>'+
+        '<td style="font-weight:600">'+(l.staff_name||'—')+'</td>'+
+        '<td><span class="badge">'+(l.action||'—')+'</span></td>'+
+        '<td style="font-size:.72rem;color:var(--muted)">'+(l.details||l.client_email||'—')+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>';
+  } catch(e) {
+    el.innerHTML = '<div class="empty"><div class="empty-text">Error: '+e.message+'</div></div>';
+  }
+}
+
+function openAddStaff() {
+  // Show inline modal
+  var modal = document.getElementById('add-staff-modal');
+  if (!modal) {
+    modal = document.createElement('div');
+    modal.id = 'add-staff-modal';
+    modal.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:9999;display:flex;align-items:center;justify-content:center;padding:1rem';
+    modal.innerHTML = `
+      <div style="background:#0F172A;border:1px solid rgba(201,148,26,.25);border-radius:16px;padding:2rem;width:100%;max-width:420px">
+        <h2 style="font-family:'Playfair Display',serif;font-size:1.05rem;color:#fff;margin-bottom:.3rem">Add Staff Member</h2>
+        <p style="font-size:.78rem;color:rgba(255,255,255,.4);margin-bottom:1.25rem">They will log in at /translation with their email and PIN.</p>
+        <label class="card-title" style="display:block;margin-bottom:.25rem">Full Name</label>
+        <input id="ns-name" type="text" placeholder="Jane Smith" style="width:100%;padding:.65rem 1rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.87rem;outline:none;margin-bottom:.65rem"/>
+        <label class="card-title" style="display:block;margin-bottom:.25rem">Email <span style="color:rgba(255,255,255,.3);font-weight:400">(used to log in)</span></label>
+        <input id="ns-email" type="email" placeholder="jane@omniservetexas.com" autocomplete="off" style="width:100%;padding:.65rem 1rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.87rem;outline:none;margin-bottom:.65rem"/>
+        <label class="card-title" style="display:block;margin-bottom:.25rem">Temporary Password <span style="color:rgba(255,255,255,.3);font-weight:400">(min 8 characters — they can change it)</span></label>
+        <input id="ns-pin" type="password" placeholder="Temporary password (8+ chars)" style="width:100%;padding:.65rem 1rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:8px;color:#fff;font-family:'DM Sans',sans-serif;font-size:.87rem;outline:none;margin-bottom:.65rem"/>
+        <label class="card-title" style="display:block;margin-bottom:.5rem">Roles <span style="color:rgba(255,255,255,.3);font-weight:400">(select one or more)</span></label>
+        <div style="display:flex;flex-direction:column;gap:.4rem;margin-bottom:.85rem" id="ns-roles-wrap">
+          <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;padding:.45rem .65rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:7px">
+            <input type="checkbox" name="ns-role" value="translator" style="accent-color:var(--gold)"/>
+            <span style="font-size:.82rem;color:rgba(255,255,255,.75)">&#128196; Translator</span>
+            <span style="font-size:.68rem;color:var(--muted);margin-left:auto">Translation queue + AI tool</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;padding:.45rem .65rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:7px">
+            <input type="checkbox" name="ns-role" value="notary" style="accent-color:var(--gold)"/>
+            <span style="font-size:.82rem;color:rgba(255,255,255,.75)">&#9997;&#65039; Notary</span>
+            <span style="font-size:.68rem;color:var(--muted);margin-left:auto">Signings + POA</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;padding:.45rem .65rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:7px">
+            <input type="checkbox" name="ns-role" value="tax_preparer" style="accent-color:var(--gold)"/>
+            <span style="font-size:.82rem;color:rgba(255,255,255,.75)">&#129526; Tax Preparer</span>
+            <span style="font-size:.68rem;color:var(--muted);margin-left:auto">Tax client queue</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;padding:.45rem .65rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:7px">
+            <input type="checkbox" name="ns-role" value="immigration" style="accent-color:var(--gold)"/>
+            <span style="font-size:.82rem;color:rgba(255,255,255,.75)">&#128738; Immigration Specialist</span>
+            <span style="font-size:.68rem;color:var(--muted);margin-left:auto">USCIS case tracker</span>
+          </label>
+          <label style="display:flex;align-items:center;gap:.6rem;cursor:pointer;padding:.45rem .65rem;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.1);border-radius:7px">
+            <input type="checkbox" name="ns-role" value="admin" style="accent-color:var(--gold)"/>
+            <span style="font-size:.82rem;color:var(--gold2);font-weight:600">&#9881; Admin</span>
+            <span style="font-size:.68rem;color:var(--muted);margin-left:auto">Full dashboard access</span>
+          </label>
+        </div>
+        <div style="font-size:.68rem;color:rgba(255,255,255,.25);margin-bottom:.85rem">Staff portal: omniservetexas.com/staff &nbsp;&middot;&nbsp; Admins go to omniservetexas.com/admin</div>
+        <div id="ns-err" style="font-size:.75rem;color:#F87171;margin-bottom:.65rem;display:none"></div>
+        <div style="display:flex;gap:.5rem">
+          <button onclick="submitAddStaff()" style="flex:1;padding:.8rem;background:var(--gold);color:var(--navy);border:none;border-radius:8px;font-family:'DM Sans',sans-serif;font-weight:700;cursor:pointer">Create Account</button>
+          <button onclick="document.getElementById('add-staff-modal').remove()" style="padding:.8rem 1.25rem;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.5);border-radius:8px;font-family:'DM Sans',sans-serif;cursor:pointer">Cancel</button>
+        </div>
+      </div>`;
+    document.body.appendChild(modal);
+  } else {
+    modal.style.display = 'flex';
+  }
+  setTimeout(function(){ var e=document.getElementById('ns-name'); if(e)e.focus(); }, 100);
+}
+
+async function submitAddStaff() {
+  var name  = (document.getElementById('ns-name')?.value  || '').trim();
+  var email = (document.getElementById('ns-email')?.value || '').trim();
+  var pin   = (document.getElementById('ns-pin')?.value   || '').trim();
+  var role  = document.getElementById('ns-role')?.value   || 'translator';
+  var errEl = document.getElementById('ns-err');
+
+  if (!name || !email || !pin) {
+    if(errEl){errEl.style.display='block';errEl.textContent='All fields required.';}
+    return;
+  }
+  if (pin.length < 8) {
+    if(errEl){errEl.style.display='block';errEl.textContent='Password must be at least 8 characters.';}
+    return;
+  }
+  if(errEl) errEl.style.display='none';
+
+  try {
+    var res = await fetch('/api/staff', {method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({action:'create', name, email, password:pin, role, roles,
+        access_token: _session && _session.access_token})});
+    var data = await res.json();
+    if (!res.ok || !data.success) throw new Error(data.error || 'Failed to create account');
+    var modal = document.getElementById('add-staff-modal');
+    if(modal) modal.remove();
+    toast(name + ' created — they log in with their email and password');
+    await loadStaffList();
+  } catch(e) {
+    if(errEl){errEl.style.display='block';errEl.textContent=e.message;}
+  }
+}
+
+// ── SMS ───────────────────────────────────────────────────────────
+async function tabSMS() {
+  var data = await api('admin_sms_queue');
+  var rows = Array.isArray(data) ? data : (data.rows||data.queue||[]);
+  render(
+    hdr('&#128241; SMS Queue', rows.length+' messages', '')+
+    (rows.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Date</th><th>To</th><th>Message</th><th>Status</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr>'+
+        '<td>'+fmtDate(r.created_at)+'</td>'+
+        '<td style="color:var(--gold2)">'+(r.to_phone||'—')+'</td>'+
+        '<td style="font-size:.73rem;max-width:320px">'+(r.message||'—').slice(0,80)+'...</td>'+
+        '<td>'+fmtStatus(r.status)+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#128241;','SMS queue is empty'))
+  );
+}
+
+// ── UPLOADS ───────────────────────────────────────────────────────
+async function tabUploads() {
+  var data = await api('admin_documents');
+  var rows = Array.isArray(data) ? data : (data.rows||data.docs||[]);
+  render(
+    hdr('&#128193; Client Documents', rows.length+' files', '')+
+    (rows.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Uploaded</th><th>Client</th><th>File</th><th>Type</th><th>Status</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr>'+
+        '<td>'+fmtDate(r.uploaded_at||r.created_at)+'</td>'+
+        '<td>'+(r.client_email||'—')+'</td>'+
+        '<td style="font-size:.73rem;color:var(--blue)">'+(r.file_name||'—')+'</td>'+
+        '<td><span class="badge">'+(r.document_type||'—')+'</span></td>'+
+        '<td>'+fmtStatus(r.status)+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#128193;','No documents uploaded yet'))
+  );
+}
+
+// ── MESSAGES ─────────────────────────────────────────────────────
+async function tabMessages() {
+  var data = await api('admin_messages');
+  var rows = Array.isArray(data) ? data : (data.rows||data.messages||[]);
+  render(
+    hdr('&#128172; Messages', rows.length+' messages', '')+
+    (rows.length ? '<div class="card"><div class="tbl-wrap"><table><thead><tr><th>Date</th><th>From</th><th>Subject</th><th>Message</th><th>Status</th></tr></thead><tbody>'+
+      rows.map(function(r){ return '<tr>'+
+        '<td>'+fmtDate(r.created_at)+'</td>'+
+        '<td style="color:var(--gold2)">'+(r.from_email||'—')+'</td>'+
+        '<td style="font-weight:600">'+(r.subject||'—')+'</td>'+
+        '<td style="font-size:.72rem;color:var(--muted);max-width:260px">'+(r.message||'—').slice(0,80)+'</td>'+
+        '<td>'+fmtStatus(r.status)+'</td>'+
+      '</tr>'; }).join('')+
+      '</tbody></table></div></div>'
+    : empty('&#128172;','No messages yet'))
+  );
+}
+
+// ── HELPER ────────────────────────────────────────────────────────
+function hdr(title, sub, actions) {
+  return '<div class="page-hdr"><div><div class="page-title">'+title+'</div><div class="page-sub">'+sub+'</div></div><div class="page-actions">'+(actions||'')+'<button class="btn btn-ghost" onclick="refreshTab()">&#8635;</button></div></div>';
+}
+</script>
+</body>
+</html>

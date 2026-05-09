@@ -1,0 +1,38 @@
+{
+  "stripe": {
+    "status": "stub",
+    "purpose": "payments, invoices, rush fees"
+  },
+  "docusign": {
+    "status": "stub",
+    "purpose": "optional e-signature workflows; do not replace notarial requirements"
+  },
+  "openai": {
+    "status": "stub",
+    "purpose": "AI intake summaries, translation assistance, staff drafting"
+  },
+  "google_vision": {
+    "status": "stub",
+    "purpose": "OCR for document intake and validation"
+  },
+  "nanonets": {
+    "status": "stub",
+    "purpose": "document classification/OCR alternative"
+  },
+  "email_service": {
+    "status": "stub",
+    "purpose": "case notices, OTP/magic links, missing docs alerts"
+  },
+  "ron_provider": {
+    "status": "stub",
+    "purpose": "third-party RON integration for credential analysis/KBA when required"
+  },
+  "n8n": {
+    "status": "local-test-to-cloud",
+    "purpose": "workflow orchestration"
+  },
+  "supabase": {
+    "status": "active",
+    "purpose": "database, auth, storage, RLS"
+  }
+}

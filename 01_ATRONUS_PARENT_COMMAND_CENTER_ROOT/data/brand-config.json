@@ -1,0 +1,25 @@
+{
+  "parent_company": "Atronus Technologies, Inc.",
+  "command_center": "Atronus Command Center + Marketing Engine",
+  "brands": [
+    {
+      "id": "omniservetexas",
+      "name": "OmniServe Texas",
+      "domain": "https://omniservetexas.com",
+      "role": "document services, POA, apostille, notary, immigration support, translation, loan signing"
+    },
+    {
+      "id": "omnibotx",
+      "name": "OmniBotX.ai",
+      "domain": "https://omnibotx.ai",
+      "role": "AI website assistant, lead capture, multilingual chat and human handoff"
+    },
+    {
+      "id": "idverifypro",
+      "name": "IDVerifyPro.ai",
+      "domain": "https://idverifypro.ai",
+      "role": "future identity verification platform - currently suspended/phase 2"
+    }
+  ],
+  "principle": "One parent command center manages cases, marketing, workflows, analytics, integrations, and audit logs across all brands. Public client forms stay on the customer-facing brand sites."
+}

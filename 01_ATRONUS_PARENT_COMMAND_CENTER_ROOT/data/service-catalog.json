@@ -1,0 +1,62 @@
+{
+  "poa": {
+    "label": "Power of Attorney",
+    "icon": "\u2696\ufe0f",
+    "kind": "service",
+    "desc": "POA preparation support, notarization coordination, apostille/legalization routing, translation when needed."
+  },
+  "apostille": {
+    "label": "Apostille & Legalization",
+    "icon": "\ud83c\udf10",
+    "kind": "service",
+    "desc": "Country-aware apostille/authentication workflow with document eligibility review and return delivery."
+  },
+  "notary": {
+    "label": "Notary / RON / Mobile",
+    "icon": "\u270d\ufe0f",
+    "kind": "service",
+    "desc": "In-office, mobile, and remote notary coordination with signer, ID, witness, and certificate checks."
+  },
+  "translation": {
+    "label": "Translation Engine",
+    "icon": "\ud83d\udde3\ufe0f",
+    "kind": "engine",
+    "desc": "Shared multilingual engine for certified translation, client messaging, staff English summaries, and document support across all services."
+  },
+  "immigration": {
+    "label": "Immigration Document Prep",
+    "icon": "\ud83d\udec2",
+    "kind": "service",
+    "desc": "Non-attorney document preparation, translation, packet organization, checklist review, and deadline tracking."
+  },
+  "loan_signing": {
+    "label": "Loan Signing Agent",
+    "icon": "\ud83c\udfe0",
+    "kind": "service",
+    "desc": "Loan signing intake for title/escrow orders, scanbacks, package handling, courier return, and QC."
+  },
+  "bookkeeping": {
+    "label": "Bookkeeping & Accounting",
+    "icon": "\ud83d\udcda",
+    "kind": "service",
+    "desc": "Monthly bookkeeping, catch-up cleanup, bank reconciliation, P&L, trucking bookkeeping, and tax-ready books."
+  },
+  "tax": {
+    "label": "Tax Preparation",
+    "icon": "\ud83e\uddfe",
+    "kind": "service",
+    "desc": "Individual, self-employed, small business, trucking operator, and multi-state tax intake and document collection."
+  },
+  "ifta": {
+    "label": "IFTA Filing",
+    "icon": "\ud83d\ude9b",
+    "kind": "service",
+    "desc": "Quarterly International Fuel Tax Agreement filing intake, mileage/fuel records, truck/unit data, and jurisdiction review."
+  },
+  "form_2290": {
+    "label": "Form 2290 / HVUT",
+    "icon": "\ud83d\udccb",
+    "kind": "service",
+    "desc": "Heavy Vehicle Use Tax filing intake, VIN/EIN/vehicle weight collection, Schedule 1 tracking, and IRS confirmation support."
+  }
+}

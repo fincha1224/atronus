@@ -1,0 +1,97 @@
+{
+  "poa": [
+    "Client identity",
+    "POA purpose",
+    "Agent information",
+    "Destination country",
+    "Draft or preparation request",
+    "Notary appointment preference",
+    "Apostille/translation options"
+  ],
+  "apostille": [
+    "Destination country",
+    "Document type",
+    "Original/notarized status",
+    "Issuing state/authority",
+    "Return shipping",
+    "Rush option",
+    "Translation need"
+  ],
+  "notary": [
+    "Document type",
+    "Signer count",
+    "ID type",
+    "Location/RON/in-office",
+    "Witness need",
+    "Preferred date/time",
+    "Language preference"
+  ],
+  "translation": [
+    "Source language",
+    "Target language",
+    "Document type",
+    "Certification required",
+    "Notarization required",
+    "Rush deadline",
+    "Upload file",
+    "Human review requirement"
+  ],
+  "immigration": [
+    "Document-preparation category",
+    "Non-attorney consent",
+    "Forms involved",
+    "Translation needs",
+    "Document checklist",
+    "Deadline",
+    "Preferred language"
+  ],
+  "loan_signing": [
+    "Title/escrow contact",
+    "Borrower name",
+    "Loan type",
+    "Signing location",
+    "Package size",
+    "Scanbacks required",
+    "Shipment instructions"
+  ],
+  "bookkeeping": [
+    "Business/client identity",
+    "Entity type",
+    "Monthly transaction volume",
+    "Bank/credit card statements",
+    "Accounting software",
+    "Catch-up period",
+    "Payroll/sales tax needs",
+    "Monthly reporting preference"
+  ],
+  "tax": [
+    "Taxpayer identity",
+    "Tax year",
+    "Filing status/entity type",
+    "W-2/1099/income documents",
+    "Deductions/credits",
+    "Prior-year return",
+    "State filing needs",
+    "Payment/refund preference"
+  ],
+  "ifta": [
+    "Company/DOT/IFTA account details",
+    "Quarter/year",
+    "Truck/unit list",
+    "Jurisdiction miles",
+    "Fuel gallons by state/province",
+    "Fuel receipts",
+    "Distance summary",
+    "Late/rush filing flag"
+  ],
+  "form_2290": [
+    "Business EIN",
+    "Vehicle VIN",
+    "Tax year/period",
+    "First-used month",
+    "Gross taxable weight",
+    "Suspended vehicle status",
+    "Prior Schedule 1 if any",
+    "IRS consent and payment method"
+  ]
+}

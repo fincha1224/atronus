@@ -1,0 +1,102 @@
+{
+  "Mexico": {
+    "hague": true,
+    "apostille_required": true,
+    "embassy_legalization": false,
+    "recommended_language": "Spanish",
+    "translation_note": "Spanish translation is commonly requested by receiving parties in Mexico. Confirm with the recipient before finalizing.",
+    "required_documents": {
+      "poa": [
+        "Government-issued photo ID for principal/signer",
+        "Draft POA or request for POA preparation",
+        "Agent/attorney-in-fact full legal name and contact",
+        "Purpose of POA and receiving institution details"
+      ],
+      "apostille": [
+        "Original notarized POA/document",
+        "Destination country: Mexico",
+        "Return shipping address",
+        "Payment for apostille processing and service fee"
+      ],
+      "notary": [
+        "Unsigned complete document",
+        "Valid government-issued photo ID",
+        "Signer must appear in person or through approved RON provider"
+      ]
+    }
+  },
+  "Spain": {
+    "hague": true,
+    "apostille_required": true,
+    "embassy_legalization": false,
+    "recommended_language": "Spanish",
+    "translation_note": "Spanish translation may be required by the receiving authority in Spain.",
+    "required_documents": {
+      "poa": [
+        "Government-issued photo ID",
+        "Draft POA or request for POA preparation",
+        "Agent information",
+        "Purpose and receiving authority"
+      ],
+      "apostille": [
+        "Original notarized document",
+        "Destination country: Spain",
+        "Return shipping address"
+      ],
+      "notary": [
+        "Unsigned complete document",
+        "Valid government-issued photo ID"
+      ]
+    }
+  },
+  "Ethiopia": {
+    "hague": false,
+    "apostille_required": false,
+    "embassy_legalization": true,
+    "recommended_language": "Amharic or English depending on receiving authority",
+    "translation_note": "Non-Hague country: authentication/embassy legalization may be required. Confirm embassy requirements before quoting final processing time.",
+    "required_documents": {
+      "poa": [
+        "Government-issued photo ID",
+        "Passport copy if available",
+        "Draft POA or request for POA preparation",
+        "Agent information",
+        "Purpose and receiving authority"
+      ],
+      "apostille": [
+        "Original notarized document",
+        "County/SOS authentication readiness",
+        "Embassy legalization instructions"
+      ],
+      "notary": [
+        "Unsigned complete document",
+        "Valid government-issued photo ID"
+      ]
+    }
+  },
+  "Other": {
+    "hague": null,
+    "apostille_required": "Check country",
+    "embassy_legalization": "Check country",
+    "recommended_language": "Confirm with receiving authority",
+    "translation_note": "Country rules must be confirmed before final quote.",
+    "required_documents": {
+      "poa": [
+        "Government-issued photo ID",
+        "Draft POA or preparation request",
+        "Agent information",
+        "Purpose of POA",
+        "Receiving country/authority"
+      ],
+      "apostille": [
+        "Original document",
+        "Destination country",
+        "Return shipping address"
+      ],
+      "notary": [
+        "Unsigned complete document",
+        "Valid government-issued photo ID"
+      ]
+    }
+  }
+}
